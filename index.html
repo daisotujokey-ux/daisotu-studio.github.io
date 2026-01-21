@@ -75,6 +75,9 @@
             border-radius: 12px;
             padding: 1.5rem 2rem;
             transition: all 0.3s ease;
+            text-decoration: none;
+            color: inherit;
+            display: block;
         }
 
         .app:hover {
@@ -132,6 +135,17 @@
             font-size: 0.8rem;
         }
 
+        .footer a {
+            color: #555;
+            text-decoration: none;
+            margin-left: 1.5rem;
+            transition: color 0.3s ease;
+        }
+
+        .footer a:hover {
+            color: #888;
+        }
+
         @media (max-width: 600px) {
             .logo {
                 font-size: 2rem;
@@ -152,11 +166,11 @@
         <p class="section-title">Apps</p>
         
         <div class="apps">
-            <div class="app">
+            <a href="https://heronikki.neocities.org" target="_blank" class="app">
                 <p class="app-name">ヒーロー日記</p>
                 <p class="app-name-en">Hero Diary</p>
                 <span class="app-status">In Development</span>
-            </div>
+            </a>
             
             <div class="app">
                 <p class="app-name">ポケットシージ</p>
@@ -176,7 +190,7 @@
             <a href="mailto:contact@daisotu-studio.com">contact@daisotu-studio.com</a>
         </div>
 
-        <p class="footer">&copy; 2025 DAISOTU STUDIO</p>
+        <p class="footer">&copy; 2025 DAISOTU STUDIO <a href="/privacy">プライバシーポリシー</a></p>
     </div>
 </body>
 </html>
