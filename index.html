@@ -77,6 +77,10 @@
             color: #3b82f6;
         }
 
+        .section-title.keiba {
+            color: #22c55e;
+        }
+
         .apps {
             display: flex;
             flex-direction: column;
@@ -107,6 +111,15 @@
 
         .app.featured:hover {
             border-color: #fbbf24;
+        }
+
+        .app.keiba-featured {
+            border-color: #22c55e;
+            background: linear-gradient(135deg, #0a1a0a 0%, #0d0d0d 100%);
+        }
+
+        .app.keiba-featured:hover {
+            border-color: #4ade80;
         }
 
         .app-name {
@@ -170,6 +183,36 @@
         .store-link:hover {
             color: #fff;
             border-color: #555;
+        }
+
+        .store-link.youtube {
+            border-color: #dc2626;
+            color: #dc2626;
+        }
+
+        .store-link.youtube:hover {
+            background: #dc2626;
+            color: #fff;
+        }
+
+        .store-link.note {
+            border-color: #22c55e;
+            color: #22c55e;
+        }
+
+        .store-link.note:hover {
+            background: #22c55e;
+            color: #fff;
+        }
+
+        .store-link.x {
+            border-color: #fff;
+            color: #fff;
+        }
+
+        .store-link.x:hover {
+            background: #fff;
+            color: #000;
         }
 
         .view-more {
@@ -271,9 +314,25 @@
             <a href="https://heronikki.neocities.org" target="_blank" class="app">
                 <p class="app-name">ヒーロー日記</p>
                 <p class="app-name-en">Hero Diary</p>
-                <p class="app-description">日々の出来事をヒーローの物語として記録。あなたの毎日がアドベンチャーに。</p>
+                <p class="app-description">気持ちを贈るヒーロー。きもちをつなぐ未来のヒーロー。寄付・支援アプリ。</p>
                 <span class="app-status">In Development</span>
             </a>
+        </div>
+
+        <!-- 競馬部門 -->
+        <p class="section-title keiba">🏇 Horse Racing</p>
+        
+        <div class="apps">
+            <div class="app keiba-featured">
+                <p class="app-name">大卒ジョッキー</p>
+                <p class="app-name-en">Daisotu Jockey</p>
+                <p class="app-description">騎手心理から競馬を紐解く。騎手のトリセツ動画や重賞予想を配信中。</p>
+                <div class="store-links">
+                    <a href="https://www.youtube.com/@daisotujokey" target="_blank" class="store-link youtube">YouTube</a>
+                    <a href="https://note.com/daisotu/m/m56efa199fb62" target="_blank" class="store-link note">note</a>
+                    <a href="https://twitter.com/daisotukeiba" target="_blank" class="store-link x">X</a>
+                </div>
+            </div>
         </div>
 
         <div class="contact">
