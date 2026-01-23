@@ -62,6 +62,14 @@
             text-transform: uppercase;
         }
 
+        .section-title.game {
+            color: #f59e0b;
+        }
+
+        .section-title.utility {
+            color: #3b82f6;
+        }
+
         .apps {
             display: flex;
             flex-direction: column;
@@ -85,6 +93,15 @@
             transform: translateY(-2px);
         }
 
+        .app.featured {
+            border-color: #f59e0b;
+            background: linear-gradient(135deg, #1a1a0a 0%, #0d0d0d 100%);
+        }
+
+        .app.featured:hover {
+            border-color: #fbbf24;
+        }
+
         .app-name {
             font-size: 1.3rem;
             font-weight: 600;
@@ -94,6 +111,13 @@
         .app-name-en {
             font-size: 0.85rem;
             color: #666;
+        }
+
+        .app-description {
+            font-size: 0.9rem;
+            color: #888;
+            margin-top: 0.8rem;
+            line-height: 1.5;
         }
 
         .app-status {
@@ -111,6 +135,40 @@
             color: #4ade80;
             border-color: #166534;
             background: #052e16;
+        }
+
+        .app-status.coming-soon {
+            color: #f59e0b;
+            border-color: #92400e;
+            background: #1c1a05;
+        }
+
+        .store-links {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .store-link {
+            font-size: 0.8rem;
+            color: #888;
+            text-decoration: none;
+            padding: 0.4rem 1rem;
+            border: 1px solid #333;
+            border-radius: 6px;
+            transition: all 0.3s ease;
+        }
+
+        .store-link:hover {
+            color: #fff;
+            border-color: #555;
+        }
+
+        .view-more {
+            font-size: 0.85rem;
+            color: #f59e0b;
+            margin-top: 0.8rem;
         }
 
         .contact {
@@ -154,6 +212,11 @@
             .app {
                 padding: 1.2rem 1.5rem;
             }
+
+            .store-links {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
         }
     </style>
 </head>
@@ -163,26 +226,46 @@
         <p class="logo-ja">大卒スタジオ</p>
         <p class="tagline">App Development Studio</p>
 
-        <p class="section-title">Apps</p>
+        <!-- ゲームアプリ部門 -->
+        <p class="section-title game">🎮 Games</p>
         
         <div class="apps">
-            <a href="https://heronikki.neocities.org" target="_blank" class="app">
-                <p class="app-name">ヒーロー日記</p>
-                <p class="app-name-en">Hero Diary</p>
-                <span class="app-status">In Development</span>
-            </a>
-            
-            <div class="app">
+            <a href="/pocketsiege" class="app featured">
                 <p class="app-name">ポケットシージ</p>
                 <p class="app-name-en">Pocket Siege</p>
-                <span class="app-status">In Development</span>
-            </div>
+                <p class="app-description">1対1のワンスクリーン攻城戦！4体のユニットで敵の城を攻め落とせ。</p>
+                <span class="app-status coming-soon">Coming Soon</span>
+                <p class="view-more">→ 詳細を見る</p>
+            </a>
             
             <div class="app">
                 <p class="app-name">超絶競馬</p>
                 <p class="app-name-en">Extreme Horse Racing</p>
                 <span class="app-status">In Development</span>
             </div>
+        </div>
+
+        <!-- 実用アプリ部門 -->
+        <p class="section-title utility">🛠 Utility Apps</p>
+        
+        <div class="apps">
+            <div class="app">
+                <p class="app-name">届出管理</p>
+                <p class="app-name-en">Todoke Management</p>
+                <p class="app-description">店舗スタッフの届出・申請をスマホで簡単管理。有休届、直帰届、勤務変更届などをデジタル化。</p>
+                <span class="app-status coming-soon">Coming Soon</span>
+                <div class="store-links">
+                    <a href="#" class="store-link">App Store</a>
+                    <a href="#" class="store-link">Google Play</a>
+                </div>
+            </div>
+
+            <a href="https://heronikki.neocities.org" target="_blank" class="app">
+                <p class="app-name">ヒーロー日記</p>
+                <p class="app-name-en">Hero Diary</p>
+                <p class="app-description">日々の出来事をヒーローの物語として記録。あなたの毎日がアドベンチャーに。</p>
+                <span class="app-status">In Development</span>
+            </a>
         </div>
 
         <div class="contact">
