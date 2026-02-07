@@ -185,6 +185,16 @@
             border-color: #555;
         }
 
+        .store-link.appstore {
+            border-color: #3b82f6;
+            color: #3b82f6;
+        }
+
+        .store-link.appstore:hover {
+            background: #3b82f6;
+            color: #fff;
+        }
+
         .store-link.youtube {
             border-color: #dc2626;
             color: #dc2626;
@@ -219,6 +229,24 @@
             font-size: 0.85rem;
             color: #f59e0b;
             margin-top: 0.8rem;
+        }
+
+        .app-screenshots {
+            display: flex;
+            justify-content: center;
+            gap: 0.8rem;
+            margin-top: 1rem;
+        }
+
+        .app-screenshots img {
+            width: 130px;
+            border-radius: 8px;
+            border: 1px solid #333;
+            transition: transform 0.3s ease;
+        }
+
+        .app-screenshots img:hover {
+            transform: scale(1.05);
         }
 
         .contact {
@@ -267,6 +295,10 @@
                 flex-direction: column;
                 gap: 0.5rem;
             }
+
+            .app-screenshots img {
+                width: 100px;
+            }
         }
     </style>
 </head>
@@ -281,6 +313,20 @@
         <p class="section-title game">🎮 Games</p>
         
         <div class="apps">
+            <a href="https://apps.apple.com/jp/app/%E5%89%B2%E3%82%8A%E5%8B%98%E3%82%B2%E3%83%BC%E3%83%A0/id6745202815" target="_blank" class="app featured">
+                <p class="app-name">割り勘ゲーム</p>
+                <p class="app-name-en">Warikan Game</p>
+                <p class="app-description">飲み会のお会計をゲームで決めよう！お金のボールが転がり落ちて、穴に入った金額がそのプレイヤーの支払いに。2〜8人対応で飲み会や食事会が盛り上がること間違いなし！</p>
+                <div class="app-screenshots">
+                    <img src="screenshot_warikan_game.png" alt="割り勘ゲーム プレイ画面">
+                    <img src="screenshot_warikan_ranking.png" alt="割り勘ゲーム ランキング画面">
+                </div>
+                <span class="app-status released">Released</span>
+                <div class="store-links">
+                    <a href="https://apps.apple.com/jp/app/%E5%89%B2%E3%82%8A%E5%8B%98%E3%82%B2%E3%83%BC%E3%83%A0/id6745202815" target="_blank" class="store-link appstore">App Store</a>
+                </div>
+            </a>
+
             <a href="/pocketsiege" class="app featured">
                 <p class="app-name">ポケットシージ</p>
                 <p class="app-name-en">Pocket Siege</p>
