@@ -122,6 +122,15 @@
             border-color: #4ade80;
         }
 
+        .app.available {
+            border-color: #f59e0b;
+            background: linear-gradient(135deg, #1a1a0a 0%, #0d0d0d 100%);
+        }
+
+        .app.available:hover {
+            border-color: #fbbf24;
+        }
+
         .app-name {
             font-size: 1.3rem;
             font-weight: 600;
@@ -178,6 +187,16 @@
             border: 1px solid #333;
             border-radius: 6px;
             transition: all 0.3s ease;
+        }
+
+        .store-link.store-available {
+            border-color: #f59e0b;
+            color: #f59e0b;
+        }
+
+        .store-link.store-available:hover {
+            background: #f59e0b;
+            color: #000;
         }
 
         .store-link:hover {
@@ -281,13 +300,17 @@
         <p class="section-title game">🎮 Games</p>
         
         <div class="apps">
-            <a href="/pocketsiege" class="app featured">
+            <div class="app featured" onclick="location.href='/pocketsiege'" style="cursor:pointer;">
                 <p class="app-name">ポケットシージ</p>
                 <p class="app-name-en">Pocket Siege</p>
                 <p class="app-description">1対1のワンスクリーン攻城戦！4体のユニットで敵の城を攻め落とせ。</p>
-                <span class="app-status coming-soon">Coming Soon</span>
+                <span class="app-status released">Now Available</span>
+                <div class="store-links">
+                    <a href="https://apps.apple.com/jp/app/siegepocket/id6758009469" target="_blank" class="store-link store-available" onclick="event.stopPropagation()">App Store</a>
+                    <a href="https://play.google.com/store/apps/details?id=com.daisotustudio.pocketsiege&pcampaignid=web_share" target="_blank" class="store-link store-available" onclick="event.stopPropagation()">Google Play</a>
+                </div>
                 <p class="view-more">→ 詳細を見る</p>
-            </a>
+            </div>
             
             <div class="app">
                 <p class="app-name">超絶競馬</p>
@@ -300,23 +323,26 @@
         <p class="section-title utility">🛠 Utility Apps</p>
         
         <div class="apps">
-            <div class="app">
+            <div class="app available">
                 <p class="app-name">届出管理</p>
                 <p class="app-name-en">Todoke Management</p>
                 <p class="app-description">店舗スタッフの届出・申請をスマホで簡単管理。有休届、直帰届、勤務変更届などをデジタル化。</p>
-                <span class="app-status coming-soon">Coming Soon</span>
+                <span class="app-status released">Now Available</span>
                 <div class="store-links">
-                    <a href="#" class="store-link">App Store</a>
-                    <a href="#" class="store-link">Google Play</a>
+                    <a href="https://apps.apple.com/jp/app/%E5%B1%8A%E5%87%BA%E7%AE%A1%E7%90%86/id6758080859" target="_blank" class="store-link store-available">App Store</a>
+                    <a href="https://play.google.com/store/apps/details?id=com.daisotustudio.todokeapp&pcampaignid=web_share" target="_blank" class="store-link store-available">Google Play</a>
                 </div>
             </div>
 
-            <a href="https://heronikki.neocities.org" target="_blank" class="app">
+            <div class="app available">
                 <p class="app-name">ヒーロー日記</p>
                 <p class="app-name-en">Hero Diary</p>
                 <p class="app-description">気持ちを贈るヒーロー。きもちをつなぐ未来のヒーロー。寄付・支援アプリ。</p>
-                <span class="app-status">In Development</span>
-            </a>
+                <span class="app-status released">Now Available</span>
+                <div class="store-links">
+                    <a href="https://apps.apple.com/jp/app/%E3%83%92%E3%83%BC%E3%83%AD%E3%83%BC%E6%97%A5%E8%A8%98/id6758861823" target="_blank" class="store-link store-available">App Store</a>
+                </div>
+            </div>
         </div>
 
         <!-- 競馬部門 -->
@@ -337,10 +363,4 @@
 
         <div class="contact">
             <p class="section-title">Contact</p>
-            <a href="mailto:contact@daisotu-studio.com">contact@daisotu-studio.com</a>
-        </div>
-
-        <p class="footer">&copy; 2025 DAISOTU STUDIO <a href="/privacy">プライバシーポリシー</a></p>
-    </div>
-</body>
-</html>
+            <a href="/cdn-cgi/l/email-protection#c9aaa6a7bda8aabd89ada8a0baa6bdbce4babdbcada0a6e7aaa6a4"><span class="__cf_email__" data-cfemail="89eae6e7fde8eafdc9ede8e0fae6fdfca4fafdfcede0e6a7eae6e4">[email&#160;protected]</span></a>
