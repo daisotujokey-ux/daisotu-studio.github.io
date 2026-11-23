@@ -3,23 +3,28 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DAISOTU STUDIO | 大卒スタジオ</title>
-    <meta name="description" content="大卒スタジオは、ゲームと実用アプリをつくる個人スタジオです。">
+    <title>超絶競馬モンスターズ | 大卒スタジオ</title>
+    <meta name="description" content="モンスターを育てて、自分の手でレースに勝つ。牧場で仲間を集め、交配で血統をつなぐ育成レースゲーム「超絶競馬モンスターズ」。">
+    <meta property="og:title" content="超絶競馬モンスターズ">
+    <meta property="og:description" content="そだてて、はしって、いっとうしょう！ 育成レースゲーム。">
+    <meta property="og:image" content="https://daisotu-studio.com/monsters_icon.jpg">
+    <link rel="icon" href="monsters_icon.jpg">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@500;700;800&family=Zen+Kaku+Gothic+New:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Dela+Gothic+One&family=Zen+Kaku+Gothic+New:wght@400;500;700;900&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg: #0d0d0d;
-            --panel: #151515;
-            --line: #262626;
-            --ink: #f3f0ea;
-            --mute: #8d8a84;
-            --dim: #5a5853;
-            --game: #f59e0b;
-            --utility: #3b82f6;
-            --keiba: #22c55e;
-            --latin: 'Syne', 'Zen Kaku Gothic New', sans-serif;
+            --bg: #08080c;
+            --panel: #12121a;
+            --line: #25253200;
+            --rule: #262633;
+            --ink: #f4f2f8;
+            --soft: #c8c6d2;
+            --mute: #8b8a99;
+            --sky: #39a0ff;      /* アイコンの左：白いロボと青い空 */
+            --dark: #b44cff;     /* アイコンの右：黒いロボと紫の闇 */
+            --hot: #ff3d5a;      /* 目の赤 */
+            --title: 'Dela Gothic One', 'Zen Kaku Gothic New', sans-serif;
             --jp: 'Zen Kaku Gothic New', -apple-system, BlinkMacSystemFont, 'Hiragino Sans', 'Yu Gothic', sans-serif;
         }
 
@@ -31,69 +36,126 @@
             font-family: var(--jp);
             background: var(--bg);
             color: var(--ink);
-            line-height: 1.7;
+            line-height: 1.75;
             -webkit-font-smoothing: antialiased;
             overflow-x: hidden;
         }
 
         a { color: inherit; }
 
-        a:focus-visible, button:focus-visible, .row-head:focus-visible {
+        a:focus-visible {
             outline: 2px solid var(--ink);
             outline-offset: 4px;
             border-radius: 4px;
         }
 
         .wrap {
-            width: min(1040px, 100% - 48px);
+            width: min(1080px, 100% - 44px);
             margin: 0 auto;
         }
 
-        /* ---------- 看板 ---------- */
+        /* ---------- いちばん上 ---------- */
 
-        .hero {
-            padding: clamp(56px, 11vw, 120px) 0 clamp(40px, 7vw, 72px);
+        .top {
+            position: relative;
+            overflow: hidden;
         }
 
-        .hero-top {
+        /* アイコンと同じ、青と紫が左右からぶつかる光 */
+        .top::before {
+            content: '';
+            position: absolute;
+            inset: -20% -10% auto -10%;
+            height: 120%;
+            background:
+                radial-gradient(46% 60% at 12% 30%, rgba(57, 160, 255, .34) 0%, rgba(57, 160, 255, 0) 70%),
+                radial-gradient(46% 60% at 88% 26%, rgba(180, 76, 255, .34) 0%, rgba(180, 76, 255, 0) 70%);
+            pointer-events: none;
+        }
+
+        .bar {
+            position: relative;
             display: flex;
             align-items: center;
-            gap: 14px;
-            margin-bottom: clamp(28px, 5vw, 48px);
-        }
-
-        .hero-top img {
-            width: 52px;
-            height: 52px;
-            border-radius: 12px;
-        }
-
-        .hero-top span {
-            font-size: 0.95rem;
-            font-weight: 500;
-            letter-spacing: 0.32em;
+            justify-content: space-between;
+            padding: 22px 0;
+            font-size: 0.9rem;
             color: var(--mute);
         }
 
-        .wordmark {
-            font-family: var(--latin);
-            font-weight: 800;
-            font-size: clamp(2.4rem, 11.2vw, 8.5rem);
-            line-height: 0.86;
-            letter-spacing: -0.035em;
-            background: linear-gradient(135deg, #ffffff 0%, #8a8a8a 100%);
-            -webkit-background-clip: text;
-            background-clip: text;
-            -webkit-text-fill-color: transparent;
+        .bar a { text-decoration: none; transition: color .2s; }
+        .bar a:hover { color: var(--ink); }
+
+        .hero {
+            position: relative;
+            display: grid;
+            grid-template-columns: 1.15fr 0.85fr;
+            gap: clamp(20px, 4vw, 56px);
+            align-items: center;
+            padding: clamp(28px, 6vw, 72px) 0 clamp(48px, 8vw, 96px);
         }
 
-        .wordmark span { display: block; }
+        .hero-id {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            margin-bottom: clamp(18px, 3vw, 30px);
+        }
 
-        /* 3つの部門の色が、ゴールへ走りこむ */
+        .hero-id img {
+            width: 68px;
+            height: 68px;
+            border-radius: 16px;
+            box-shadow: 0 0 0 1px rgba(255, 255, 255, .14), 0 14px 34px -10px rgba(120, 90, 255, .7);
+        }
+
+        .state {
+            font-size: 0.82rem;
+            font-weight: 700;
+            padding: 4px 14px;
+            border-radius: 999px;
+            color: #0b0b12;
+            background: linear-gradient(90deg, var(--sky), var(--dark));
+        }
+
+        h1 {
+            font-family: var(--title);
+            font-weight: 400;
+            font-size: clamp(2.7rem, 6.8vw, 5rem);
+            line-height: 1.12;
+            letter-spacing: 0.01em;
+        }
+
+        h1 span { display: block; white-space: nowrap; }
+
+        h1 .a {
+            background: linear-gradient(90deg, #ffffff 0%, #9fd0ff 100%);
+            -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
+        }
+
+        h1 .b {
+            background: linear-gradient(90deg, #7fb8ff 0%, #c06bff 55%, #ff5c8a 100%);
+            -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
+        }
+
+        .catch {
+            margin-top: clamp(16px, 2.6vw, 26px);
+            font-size: clamp(1.1rem, 2.3vw, 1.5rem);
+            font-weight: 900;
+        }
+
+        .lead {
+            margin-top: 12px;
+            max-width: 27em;
+            color: var(--soft);
+        }
+
+        /* 2本の線がゴールへ走りこむ */
         .lanes {
-            margin-top: clamp(26px, 4.5vw, 44px);
+            margin-top: clamp(22px, 3.6vw, 36px);
             display: grid;
             gap: 7px;
+            max-width: 520px;
         }
 
         .lane {
@@ -103,525 +165,338 @@
             animation: run 1.5s cubic-bezier(.2, .7, .1, 1) both;
         }
 
-        .lane.game { background: var(--game); width: 100%; animation-delay: .15s; }
-        .lane.utility { background: var(--utility); width: 71%; animation-delay: .32s; animation-duration: 1.75s; }
-        .lane.keiba { background: var(--keiba); width: 46%; animation-delay: .05s; animation-duration: 1.2s; }
+        .lane.s { background: linear-gradient(90deg, rgba(57, 160, 255, .2), var(--sky)); width: 100%; animation-delay: .25s; animation-duration: 1.7s; }
+        .lane.d { background: linear-gradient(90deg, rgba(180, 76, 255, .2), var(--dark)); width: 93%; animation-delay: .1s; animation-duration: 1.35s; }
 
-        @keyframes run {
-            from { transform: scaleX(0); }
-            to { transform: scaleX(1); }
-        }
+        @keyframes run { from { transform: scaleX(0); } to { transform: scaleX(1); } }
 
-        .lead {
-            margin-top: clamp(26px, 4.5vw, 44px);
-            max-width: 31em;
-            font-size: clamp(1rem, 1.6vw, 1.15rem);
-            color: #c9c6bf;
-        }
-
-        .jump {
-            margin-top: 26px;
+        .store {
+            margin-top: clamp(22px, 3.6vw, 36px);
             display: flex;
             flex-wrap: wrap;
-            gap: 10px 22px;
-            font-size: 0.95rem;
+            align-items: center;
+            gap: 12px 18px;
         }
 
-        .jump a {
-            text-decoration: none;
-            color: var(--mute);
+        .store-btn {
             display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            transition: color .2s;
+            flex-direction: column;
+            padding: 10px 26px;
+            border-radius: 14px;
+            border: 1px solid #3b3b4d;
+            background: #14141d;
+            color: var(--mute);
+            line-height: 1.3;
         }
 
-        .jump a::before {
-            content: '';
-            width: 9px;
-            height: 9px;
-            border-radius: 50%;
-            background: var(--c);
-        }
+        .store-btn b { font-size: 1.1rem; color: var(--soft); }
+        .store-btn small { font-size: 0.75rem; }
 
-        .jump a:hover { color: var(--ink); }
+        .store p { color: var(--mute); font-size: 0.9rem; }
 
-        /* ---------- 新作 ---------- */
-
-        .feature {
+        .phones {
             position: relative;
+            display: flex;
+            justify-content: center;
+            gap: 16px;
+        }
+
+        .phones img {
+            width: min(47%, 230px);
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, .14);
+            box-shadow: 0 30px 60px -22px rgba(0, 0, 0, .95);
+        }
+
+        .phones img:first-child { transform: translateY(22px) rotate(-4deg); box-shadow: 0 30px 60px -22px rgba(0, 0, 0, .95), -18px 0 60px -30px var(--sky); }
+        .phones img:last-child { transform: translateY(-14px) rotate(3deg); box-shadow: 0 30px 60px -22px rgba(0, 0, 0, .95), 18px 0 60px -30px var(--dark); }
+
+        /* ---------- あそび方 ---------- */
+
+        .play {
+            padding: clamp(40px, 8vw, 96px) 0 0;
+        }
+
+        .play > h2, .modes > h2 {
+            font-family: var(--title);
+            font-weight: 400;
+            font-size: clamp(1.6rem, 4.2vw, 2.6rem);
+            line-height: 1.25;
+        }
+
+        .step {
             display: grid;
-            grid-template-columns: 1.05fr 1fr;
-            gap: clamp(20px, 4vw, 48px);
+            grid-template-columns: 1fr 1fr;
+            gap: clamp(22px, 5vw, 72px);
             align-items: center;
-            padding: clamp(22px, 4vw, 44px);
-            border: 1px solid #3a2a08;
+            padding: clamp(36px, 7vw, 84px) 0;
+            border-bottom: 1px solid var(--rule);
+        }
+
+        .step:last-child { border-bottom: 0; }
+
+        .step:nth-child(odd) .step-pic { order: 2; }
+
+        .step-pic {
+            display: flex;
+            justify-content: center;
+        }
+
+        .step-pic img {
+            width: min(100%, 300px);
             border-radius: 22px;
-            background:
-                radial-gradient(120% 140% at 100% 0%, rgba(245, 158, 11, .16) 0%, rgba(245, 158, 11, 0) 55%),
-                linear-gradient(135deg, #1a1608 0%, #101010 70%);
-            text-decoration: none;
-            overflow: hidden;
-            transition: border-color .25s;
+            border: 1px solid rgba(255, 255, 255, .12);
+            box-shadow: 0 34px 70px -30px var(--glow, #000);
         }
 
-        .feature:hover { border-color: var(--game); }
-
-        .feature-tag {
-            display: inline-block;
-            font-size: 0.8rem;
-            font-weight: 700;
-            color: #1a1200;
-            background: var(--game);
-            padding: 3px 12px;
-            border-radius: 999px;
-        }
-
-        .feature h2 {
-            margin-top: 16px;
-            font-size: clamp(1.7rem, 4.4vw, 2.9rem);
+        .step h3 {
+            font-size: clamp(1.45rem, 3.4vw, 2.2rem);
             font-weight: 900;
-            line-height: 1.18;
-            letter-spacing: 0.01em;
+            line-height: 1.35;
         }
 
-        .feature p {
+        .step h3 em {
+            font-style: normal;
+            display: block;
+            font-size: 0.95rem;
+            font-weight: 700;
+            color: var(--c);
+            margin-bottom: 6px;
+        }
+
+        .step p {
             margin-top: 14px;
-            color: #c9c6bf;
+            color: var(--soft);
             max-width: 26em;
         }
 
-        .feature-more {
-            margin-top: 22px;
-            display: inline-block;
-            font-weight: 700;
-            color: var(--game);
-            border-bottom: 2px solid currentColor;
-            padding-bottom: 2px;
-        }
-
-        .feature-shots {
-            display: flex;
-            justify-content: center;
-            gap: 14px;
-        }
-
-        .feature-shots img {
-            width: min(46%, 200px);
-            border-radius: 16px;
-            border: 1px solid rgba(255, 255, 255, .12);
-            box-shadow: 0 22px 44px -18px rgba(0, 0, 0, .9);
-        }
-
-        .feature-shots img:first-child { transform: translateY(14px) rotate(-3deg); }
-        .feature-shots img:last-child { transform: translateY(-10px) rotate(2.5deg); }
-
-        /* ---------- 部門 ---------- */
-
-        .dept {
-            padding-top: clamp(56px, 9vw, 104px);
-        }
-
-        .dept-head {
-            display: flex;
-            align-items: baseline;
-            justify-content: space-between;
-            gap: 16px;
-            padding-bottom: 14px;
-            border-bottom: 2px solid var(--c);
-        }
-
-        .dept-head h2 {
-            font-family: var(--latin);
-            font-weight: 700;
-            font-size: clamp(1.7rem, 4vw, 2.5rem);
-            letter-spacing: -0.02em;
-            line-height: 1.1;
-        }
-
-        .dept-head p {
-            color: var(--mute);
-            font-size: 0.95rem;
-            text-align: right;
-        }
-
-        .row {
-            border-bottom: 1px solid var(--line);
-        }
-
-        .row-head {
-            width: 100%;
+        .step ul {
+            margin-top: 16px;
+            list-style: none;
             display: grid;
-            grid-template-columns: 1fr auto 28px;
-            align-items: center;
-            gap: 18px;
-            padding: 22px 4px;
-            background: none;
-            border: 0;
-            color: inherit;
-            font: inherit;
-            text-align: left;
-            cursor: pointer;
-            text-decoration: none;
+            gap: 8px;
+            color: var(--soft);
         }
 
-        .row-name {
-            font-size: clamp(1.25rem, 3vw, 1.7rem);
-            font-weight: 700;
+        .step li {
+            padding-left: 20px;
+            position: relative;
+        }
+
+        .step li::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0.72em;
+            width: 10px;
+            height: 3px;
+            border-radius: 2px;
+            background: var(--c);
+        }
+
+        /* ---------- モード ---------- */
+
+        .modes {
+            padding: clamp(48px, 9vw, 110px) 0 0;
+        }
+
+        .mode-list {
+            margin-top: clamp(18px, 3vw, 30px);
+            border-top: 2px solid;
+            border-image: linear-gradient(90deg, var(--sky), var(--dark)) 1;
+        }
+
+        .mode {
+            display: grid;
+            grid-template-columns: minmax(8em, 15em) 1fr;
+            gap: 8px 24px;
+            padding: 18px 4px;
+            border-bottom: 1px solid var(--rule);
+        }
+
+        .mode b { font-size: 1.15rem; }
+        .mode span { color: var(--soft); }
+
+        /* ---------- おわり ---------- */
+
+        .end {
+            margin-top: clamp(56px, 10vw, 120px);
+            padding: clamp(36px, 7vw, 76px) clamp(22px, 5vw, 60px);
+            border-radius: 26px;
+            border: 1px solid #2c2c3d;
+            background:
+                radial-gradient(70% 120% at 0% 0%, rgba(57, 160, 255, .2) 0%, rgba(57, 160, 255, 0) 60%),
+                radial-gradient(70% 120% at 100% 100%, rgba(180, 76, 255, .22) 0%, rgba(180, 76, 255, 0) 60%),
+                var(--panel);
+            text-align: center;
+        }
+
+        .end h2 {
+            font-family: var(--title);
+            font-weight: 400;
+            font-size: clamp(1.5rem, 4.4vw, 2.6rem);
             line-height: 1.3;
-            transition: color .2s;
         }
 
-        .row-en {
-            display: block;
-            font-family: var(--latin);
-            font-weight: 500;
-            font-size: 0.85rem;
-            color: var(--dim);
-            letter-spacing: 0.02em;
-        }
+        .end p { margin-top: 12px; color: var(--soft); }
 
-        .row-head:hover .row-name { color: var(--c); }
-
-        .status {
-            font-size: 0.78rem;
-            font-weight: 700;
-            padding: 3px 12px;
-            border-radius: 999px;
-            white-space: nowrap;
-            color: #4ade80;
-            background: #052e16;
-            border: 1px solid #166534;
-        }
-
-        .status.soon {
-            color: var(--game);
-            background: #1c1505;
-            border-color: #92400e;
-        }
-
-        .chev {
-            width: 12px;
-            height: 12px;
-            justify-self: center;
-            border-right: 2px solid var(--mute);
-            border-bottom: 2px solid var(--mute);
-            transform: rotate(45deg) translate(-2px, -2px);
-            transition: transform .25s, border-color .2s;
-        }
-
-        .row-head[aria-expanded="true"] .chev {
-            transform: rotate(-135deg) translate(-2px, -2px);
-            border-color: var(--c);
-        }
-
-        .chev.go { transform: rotate(-45deg); }
-
-        .row-body {
-            display: grid;
-            grid-template-rows: 0fr;
-            transition: grid-template-rows .32s ease;
-        }
-
-        .row-body > div { overflow: hidden; }
-
-        .row.open .row-body { grid-template-rows: 1fr; }
-
-        .row-inner {
-            padding: 2px 4px 30px;
-            display: grid;
-            gap: 20px;
-        }
-
-        .row-inner p {
-            color: #c9c6bf;
-            max-width: 40em;
-        }
-
-        .shots {
-            display: flex;
-            gap: 12px;
-            overflow-x: auto;
-            padding-bottom: 6px;
-            scrollbar-width: thin;
-            scrollbar-color: #333 transparent;
-        }
-
-        .shots img, .shots video {
-            flex: 0 0 auto;
-            width: 168px;
-            border-radius: 12px;
-            border: 1px solid var(--line);
-        }
-
-        .links {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-        }
-
-        .btn {
-            display: inline-block;
-            padding: 9px 20px;
-            border-radius: 999px;
-            border: 1px solid var(--c);
-            color: var(--c);
-            font-size: 0.92rem;
-            font-weight: 700;
-            text-decoration: none;
-            transition: background .2s, color .2s;
-        }
-
-        .btn:hover { background: var(--c); color: #0d0d0d; }
-
-        .btn.quiet { border-color: #3a3a3a; color: #b9b6af; font-weight: 500; }
-        .btn.quiet:hover { background: #2a2a2a; color: var(--ink); }
-
-        .btn.youtube { --c: #ef4444; }
-        .btn.x { --c: #f3f0ea; }
-
-        /* ---------- 連絡先 ---------- */
-
-        .contact {
-            padding: clamp(72px, 12vw, 136px) 0 clamp(36px, 6vw, 60px);
-        }
-
-        .contact p { color: var(--mute); }
-
-        .contact a.mail {
-            display: inline-block;
-            margin-top: 8px;
-            font-family: var(--latin);
-            font-weight: 700;
-            font-size: clamp(1.25rem, 4.6vw, 3rem);
-            letter-spacing: -0.02em;
-            text-decoration: none;
-            border-bottom: 2px solid #3a3a3a;
-            transition: border-color .2s;
-            word-break: break-all;
-        }
-
-        .contact a.mail:hover { border-color: var(--ink); }
+        .end .store { justify-content: center; }
 
         .foot {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: space-between;
-            gap: 10px 24px;
-            padding: 22px 0 44px;
-            border-top: 1px solid var(--line);
-            color: var(--dim);
-            font-size: 0.85rem;
+            padding: clamp(40px, 7vw, 72px) 0 48px;
+            display: grid;
+            gap: 18px;
+            color: var(--mute);
+            font-size: 0.9rem;
         }
 
-        .foot a { color: var(--mute); text-decoration: none; }
+        .foot nav {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px 22px;
+        }
+
+        .foot a { text-decoration: none; transition: color .2s; }
         .foot a:hover { color: var(--ink); }
 
-        @media (max-width: 720px) {
-            .feature { grid-template-columns: 1fr; }
-            .feature-shots { order: -1; padding: 6px 0 14px; }
-            .dept-head { flex-direction: column; gap: 4px; }
-            .dept-head p { text-align: left; }
-            .row-head { grid-template-columns: 1fr 22px; gap: 10px; padding: 18px 2px; }
-            .row-head .status { grid-column: 1; grid-row: 2; justify-self: start; }
-            .row-head .chev { grid-column: 2; grid-row: 1 / span 2; }
-            .shots img, .shots video { width: 132px; }
+        .foot .mail { color: var(--soft); font-weight: 700; }
+
+        @media (max-width: 760px) {
+            .hero { grid-template-columns: 1fr; }
+            .phones { padding: 18px 0 8px; }
+            .step { grid-template-columns: 1fr; }
+            .step:nth-child(odd) .step-pic { order: 0; }
+            .step-pic img { width: min(72%, 260px); }
+            .mode { grid-template-columns: 1fr; }
         }
 
         @media (prefers-reduced-motion: reduce) {
             .lane { animation: none; }
-            .row-body, .chev { transition: none; }
             html { scroll-behavior: auto; }
         }
     </style>
 </head>
 <body>
-    <header class="hero wrap">
-        <div class="hero-top">
-            <img src="icon.png" alt="">
-            <span>大卒スタジオ</span>
+    <div class="top">
+        <div class="wrap">
+            <div class="bar">
+                <span>大卒スタジオのゲーム</span>
+                <a href="#play">どんなゲーム？</a>
+            </div>
+
+            <header class="hero">
+                <div>
+                    <div class="hero-id">
+                        <img src="monsters_icon.jpg" alt="超絶競馬モンスターズのアイコン">
+                        <span class="state">開発中</span>
+                    </div>
+                    <h1><span class="a">超絶競馬</span><span class="b">モンスターズ</span></h1>
+                    <p class="catch">そだてて、はしって、いっとうしょう！</p>
+                    <p class="lead">モンスターを育てて、自分の手でレースに勝つ。育成レースゲームです。</p>
+                    <div class="lanes" aria-hidden="true">
+                        <div class="lane s"></div>
+                        <div class="lane d"></div>
+                    </div>
+                    <div class="store">
+                        <span class="store-btn"><small>iPhone・iPad</small><b>App Store</b></span>
+                        <p>公開の準備をしています</p>
+                    </div>
+                </div>
+                <div class="phones">
+                    <img src="monsters_race.jpg" alt="レースの画面">
+                    <img src="monsters_stable.jpg" alt="育成の画面">
+                </div>
+            </header>
         </div>
-        <h1 class="wordmark"><span>DAISOTU</span><span>STUDIO</span></h1>
-        <div class="lanes" aria-hidden="true">
-            <div class="lane game"></div>
-            <div class="lane utility"></div>
-            <div class="lane keiba"></div>
-        </div>
-        <p class="lead">ゲームと、毎日の仕事をらくにするアプリをつくっています。競馬の話もしています。</p>
-        <nav class="jump" aria-label="ページ内の移動">
-            <a href="#games" style="--c: var(--game)">ゲーム</a>
-            <a href="#utility" style="--c: var(--utility)">実用アプリ</a>
-            <a href="#keiba" style="--c: var(--keiba)">競馬</a>
-        </nav>
-    </header>
+    </div>
 
     <main class="wrap">
-        <!-- 新作 -->
-        <a class="feature" href="monsters.html">
-            <div>
-                <span class="feature-tag">開発中の新作</span>
-                <h2>超絶競馬<br>モンスターズ</h2>
-                <p>モンスターを育てて、自分の手でレースに勝つ。牧場で仲間を集め、交配で血統をつなぐ育成レースゲーム。</p>
-                <span class="feature-more">紹介ページを見る</span>
-            </div>
-            <div class="feature-shots">
-                <img src="monsters_race.jpg" alt="超絶競馬モンスターズのレース画面">
-                <img src="monsters_stable.jpg" alt="超絶競馬モンスターズの育成画面">
-            </div>
-        </a>
+        <section class="play" id="play">
+            <h2>どんなゲーム？</h2>
 
-        <!-- ゲーム -->
-        <section class="dept" id="games" style="--c: var(--game)">
-            <div class="dept-head">
-                <h2>Games</h2>
-                <p>ゲーム</p>
-            </div>
-
-            <div class="row">
-                <button class="row-head" aria-expanded="false" aria-controls="warikan">
-                    <span class="row-name">割り勘ゲーム<span class="row-en">Warikan Game</span></span>
-                    <span class="status">公開中</span>
-                    <span class="chev" aria-hidden="true"></span>
-                </button>
-                <div class="row-body" id="warikan"><div><div class="row-inner">
-                    <p>飲み会のお会計をゲームで決めよう！お金のボールが転がり落ちて、穴に入った金額がそのプレイヤーの支払いに。2〜8人対応で飲み会や食事会が盛り上がる。</p>
-                    <div class="shots">
-                        <img src="screenshot_warikan_game.png" alt="割り勘ゲーム プレイ画面" loading="lazy">
-                        <img src="screenshot_warikan_ranking.png" alt="割り勘ゲーム ランキング画面" loading="lazy">
+            <div class="steps">
+                <div class="step" style="--c: var(--sky); --glow: rgba(57, 160, 255, .55)">
+                    <div class="step-pic"><img src="monsters_race2.jpg" alt="レース中の画面" loading="lazy"></div>
+                    <div>
+                        <h3><em>レース</em>自分で乗って、勝つ</h3>
+                        <p>見ているだけのレースではありません。スティックで位置を取り、ムチとスキルの使いどころを自分で決めます。</p>
+                        <ul>
+                            <li>スタミナと乳酸をどう残すかで、最後の伸びが変わる</li>
+                            <li>風、坂、荒れた馬場が勝負を分ける</li>
+                            <li>全国の競馬場で、新馬戦からG1、海外の大レースへ</li>
+                        </ul>
                     </div>
-                    <div class="links">
-                        <a class="btn" href="https://apps.apple.com/jp/app/%E5%89%B2%E3%82%8A%E5%8B%98%E3%82%B2%E3%83%BC%E3%83%A0/id6745202815" target="_blank" rel="noopener">App Store</a>
-                    </div>
-                </div></div></div>
-            </div>
-
-            <div class="row">
-                <button class="row-head" aria-expanded="false" aria-controls="pocketsiege">
-                    <span class="row-name">ポケットシージ<span class="row-en">Pocket Siege</span></span>
-                    <span class="status">公開中</span>
-                    <span class="chev" aria-hidden="true"></span>
-                </button>
-                <div class="row-body" id="pocketsiege"><div><div class="row-inner">
-                    <p>1対1のワンスクリーン攻城戦！4体のユニットを選んで敵の城を攻め落とせ。自爆兵、魔法使い、騎士など個性豊かなユニットで自分だけの最強編成を見つけよう。</p>
-                    <div class="shots">
-                        <img src="screenshot_menu.png" alt="メニュー画面" loading="lazy">
-                        <img src="screenshot_battle.png" alt="バトル画面" loading="lazy">
-                        <img src="screenshot_unit.png" alt="ユニット選択" loading="lazy">
-                        <img src="screenshot_friend.png" alt="フレンド対戦" loading="lazy">
-                    </div>
-                    <div class="links">
-                        <a class="btn" href="https://apps.apple.com/jp/app/siegepocket/id6758009469" target="_blank" rel="noopener">App Store</a>
-                        <a class="btn" href="https://play.google.com/store/apps/details?id=com.daisotustudio.pocketsiege&pcampaignid=web_share" target="_blank" rel="noopener">Google Play</a>
-                        <a class="btn quiet" href="pocketsiege.html">くわしい紹介</a>
-                    </div>
-                </div></div></div>
-            </div>
-
-            <div class="row">
-                <button class="row-head" aria-expanded="false" aria-controls="chozetsukeiba">
-                    <span class="row-name">超絶競馬<span class="row-en">Extreme Horse Racing</span></span>
-                    <span class="status">公開中</span>
-                    <span class="chev" aria-hidden="true"></span>
-                </button>
-                <div class="row-body" id="chozetsukeiba"><div><div class="row-inner">
-                    <div class="shots">
-                        <video src="output_pv_small.mp4" muted loop playsinline preload="none"></video>
-                    </div>
-                    <div class="links">
-                        <a class="btn" href="https://apps.apple.com/jp/app/%E8%B6%85%E7%B5%B6%E7%AB%B6%E9%A6%AC/id6760916156" target="_blank" rel="noopener">App Store</a>
-                    </div>
-                </div></div></div>
-            </div>
-
-            <div class="row">
-                <a class="row-head" href="monsters.html">
-                    <span class="row-name">超絶競馬モンスターズ<span class="row-en">Extreme Horse Racing Monsters</span></span>
-                    <span class="status soon">開発中</span>
-                    <span class="chev go" aria-hidden="true"></span>
-                </a>
-            </div>
-        </section>
-
-        <!-- 実用アプリ -->
-        <section class="dept" id="utility" style="--c: var(--utility)">
-            <div class="dept-head">
-                <h2>Utility Apps</h2>
-                <p>実用アプリ</p>
-            </div>
-
-            <div class="row">
-                <button class="row-head" aria-expanded="false" aria-controls="todoke">
-                    <span class="row-name">届出管理<span class="row-en">Todoke Management</span></span>
-                    <span class="status">公開中</span>
-                    <span class="chev" aria-hidden="true"></span>
-                </button>
-                <div class="row-body" id="todoke"><div><div class="row-inner">
-                    <p>店舗スタッフの届出・申請をスマホで簡単管理。有休届、直帰届、勤務変更届などをデジタル化。</p>
-                    <div class="links">
-                        <a class="btn" href="https://apps.apple.com/jp/app/%E5%B1%8A%E5%87%BA%E7%AE%A1%E7%90%86/id6758080859" target="_blank" rel="noopener">App Store</a>
-                        <a class="btn" href="https://play.google.com/store/apps/details?id=com.daisotustudio.todokeapp&pcampaignid=web_share" target="_blank" rel="noopener">Google Play</a>
-                    </div>
-                </div></div></div>
-            </div>
-
-            <div class="row">
-                <button class="row-head" aria-expanded="false" aria-controls="heronikki">
-                    <span class="row-name">ヒーロー日記<span class="row-en">Hero Diary</span></span>
-                    <span class="status">公開中</span>
-                    <span class="chev" aria-hidden="true"></span>
-                </button>
-                <div class="row-body" id="heronikki"><div><div class="row-inner">
-                    <p>気持ちを贈るヒーロー。きもちをつなぐ未来のヒーロー。寄付・支援アプリ。</p>
-                    <div class="links">
-                        <a class="btn" href="https://apps.apple.com/jp/app/%E3%83%92%E3%83%BC%E3%83%AD%E3%83%BC%E6%97%A5%E8%A8%98/id6758861823" target="_blank" rel="noopener">App Store</a>
-                    </div>
-                </div></div></div>
-            </div>
-        </section>
-
-        <!-- 競馬 -->
-        <section class="dept" id="keiba" style="--c: var(--keiba)">
-            <div class="dept-head">
-                <h2>Horse Racing</h2>
-                <p>競馬</p>
-            </div>
-
-            <div class="row open">
-                <div class="row-head" style="cursor: default; grid-template-columns: 1fr;">
-                    <span class="row-name">大卒ジョッキー<span class="row-en">Daisotu Jockey</span></span>
                 </div>
-                <div class="row-body"><div><div class="row-inner">
-                    <p>騎手心理から競馬を紐解く。騎手のトリセツ動画や重賞予想を配信中。</p>
-                    <div class="links">
-                        <a class="btn youtube" href="https://www.youtube.com/@daisotujokey" target="_blank" rel="noopener">YouTube</a>
-                        <a class="btn" href="https://note.com/daisotu/m/m56efa199fb62" target="_blank" rel="noopener">note</a>
-                        <a class="btn x" href="https://twitter.com/daisotukeiba" target="_blank" rel="noopener">X</a>
+
+                <div class="step" style="--c: var(--dark); --glow: rgba(180, 76, 255, .55)">
+                    <div class="step-pic"><img src="monsters_stable.jpg" alt="馬房の画面" loading="lazy"></div>
+                    <div>
+                        <h3><em>育成</em>7日間で、どこまで強くなるか</h3>
+                        <p>食事、トレーニング、レース。1体を育てられるのは7日間だけ。何を伸ばして、どのレースをねらうかを考えます。</p>
+                        <ul>
+                            <li>60種類以上のモンスター</li>
+                            <li>育て方しだいで、ちがう姿に進化する</li>
+                            <li>1体ごとに、得意な能力も性格もちがう</li>
+                        </ul>
                     </div>
-                </div></div></div>
+                </div>
+
+                <div class="step" style="--c: var(--sky); --glow: rgba(57, 160, 255, .55)">
+                    <div class="step-pic"><img src="monsters_ranch.jpg" alt="牧場の画面" loading="lazy"></div>
+                    <div>
+                        <h3><em>牧場</em>仲間は、向こうからやってくる</h3>
+                        <p>牧場に置き物やえさを置くと、モンスターが遊びに来ます。気になる子と勝負して、勝てば仲間に。</p>
+                        <ul>
+                            <li>置く物を変えると、来る子も変わる</li>
+                            <li>だれが来るかは、来てからのおたのしみ</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="step" style="--c: var(--dark); --glow: rgba(180, 76, 255, .55)">
+                    <div class="step-pic"><img src="monsters_freezer.jpg" alt="冷凍庫の画面" loading="lazy"></div>
+                    <div>
+                        <h3><em>交配</em>走りおえた子が、親になる</h3>
+                        <p>引退した子どうしを交配させると、子どもが生まれます。素質やスキルを受けついだ子で、さらに上のレースへ。</p>
+                        <ul>
+                            <li>大きいレースを勝った親の子は、生まれつき強くなりやすい</li>
+                            <li>同じ親でも、生まれる子は1体ずつちがう</li>
+                        </ul>
+                    </div>
+                </div>
             </div>
         </section>
 
-        <section class="contact">
-            <p>お問い合わせ</p>
-            <a class="mail" href="mailto:contact@daisotu-studio.com">contact@daisotu-studio.com</a>
+        <section class="modes">
+            <h2>あそべること</h2>
+            <div class="mode-list">
+                <div class="mode"><b>育成</b><span>食事・トレーニング・レースで、モンスターを7日間そだてる</span></div>
+                <div class="mode"><b>オンラインレース</b><span>育てたモンスターで、ほかのプレイヤーと対戦する</span></div>
+                <div class="mode"><b>練習レース</b><span>好きな競馬場と距離で、自由に走る</span></div>
+                <div class="mode"><b>牧場</b><span>置き物やえさで、モンスターを呼ぶ</span></div>
+                <div class="mode"><b>図鑑</b><span>出会ったモンスターを集める</span></div>
+            </div>
+        </section>
+
+        <section class="end">
+            <h2>いっとうしょうを、とりにいこう</h2>
+            <p>ただいま開発中です。公開までお待ちください。</p>
+            <div class="store">
+                <span class="store-btn"><small>iPhone・iPad</small><b>App Store</b></span>
+                <p>公開の準備をしています</p>
+            </div>
         </section>
 
         <footer class="foot">
-            <span>&copy; 2025 DAISOTU STUDIO</span>
-            <a href="privacy.html">プライバシーポリシー</a>
+            <nav aria-label="規約など">
+                <a href="monsters-terms.html">利用規約</a>
+                <a href="monsters-legal.html">特定商取引法・資金決済法にもとづく表示</a>
+                <a href="privacy.html">プライバシーポリシー</a>
+                <a href="studio.html">大卒スタジオのほかのアプリ</a>
+            </nav>
+            <div>お問い合わせ　<a class="mail" href="mailto:contact@daisotu-studio.com">contact@daisotu-studio.com</a></div>
+            <div>&copy; 2025 DAISOTU STUDIO（大卒スタジオ）</div>
         </footer>
     </main>
-
-    <script>
-        document.querySelectorAll('button.row-head').forEach(function (head) {
-            head.addEventListener('click', function () {
-                var row = head.parentElement;
-                var open = row.classList.toggle('open');
-                head.setAttribute('aria-expanded', open ? 'true' : 'false');
-                var video = row.querySelector('video');
-                if (video) { if (open) { video.play(); } else { video.pause(); } }
-            });
-        });
-    </script>
 </body>
 </html>
