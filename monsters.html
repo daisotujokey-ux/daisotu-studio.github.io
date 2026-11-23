@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>超絶競馬モンスターズ | DAISOTU STUDIO</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background-color: #0d1a2d;
+            color: #ffffff;
+            min-height: 100vh;
+        }
+
+        .header {
+            background: linear-gradient(180deg, #1a2d4a 0%, #0d1a2d 100%);
+            padding: 20px;
+            text-align: center;
+        }
+
+        .back-link {
+            position: absolute;
+            left: 20px;
+            top: 20px;
+            color: #888;
+            text-decoration: none;
+            font-size: 0.9rem;
+        }
+
+        .back-link:hover {
+            color: #fff;
+        }
+
+        .hero {
+            padding: 60px 20px;
+            text-align: center;
+            background: linear-gradient(180deg, #0d1a2d 0%, #152238 50%, #0d1a2d 100%);
+        }
+
+        .logo {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            color: #fff;
+        }
+
+        .subtitle {
+            font-size: 1.5rem;
+            color: #f59e0b;
+            margin-bottom: 1rem;
+            letter-spacing: 0.1em;
+        }
+
+        .tagline {
+            font-size: 1.1rem;
+            color: #888;
+            margin-bottom: 2rem;
+        }
+
+        .badge {
+            display: inline-block;
+            background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+            color: #000;
+            padding: 0.5rem 1.5rem;
+            border-radius: 30px;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        .screenshots {
+            padding: 40px 20px;
+            overflow-x: auto;
+        }
+
+        .screenshots h2 {
+            text-align: center;
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+            color: #f59e0b;
+        }
+
+        .screenshot-container {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .screenshot {
+            width: 200px;
+            height: 400px;
+            background: #1a2d4a;
+            border-radius: 12px;
+            overflow: hidden;
+            flex-shrink: 0;
+        }
+
+        .screenshot img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .features {
+            padding: 60px 20px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .features h2 {
+            text-align: center;
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+            color: #f59e0b;
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .feature {
+            background: linear-gradient(135deg, #1a2d4a 0%, #152238 100%);
+            border: 1px solid #2a4a6a;
+            border-radius: 12px;
+            padding: 1.5rem;
+        }
+
+        .feature h3 {
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+            color: #fff;
+        }
+
+        .feature p {
+            font-size: 0.9rem;
+            color: #888;
+            line-height: 1.6;
+        }
+
+        .modes {
+            padding: 60px 20px;
+            background: #152238;
+        }
+
+        .modes h2 {
+            text-align: center;
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+            color: #f59e0b;
+        }
+
+        .mode-list {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .mode {
+            display: flex;
+            align-items: center;
+            padding: 1rem;
+            border-bottom: 1px solid #2a4a6a;
+        }
+
+        .mode:last-child {
+            border-bottom: none;
+        }
+
+        .mode-icon {
+            font-size: 1.5rem;
+            margin-right: 1rem;
+            width: 40px;
+            text-align: center;
+        }
+
+        .mode-info h4 {
+            font-size: 1rem;
+            margin-bottom: 0.3rem;
+        }
+
+        .mode-info p {
+            font-size: 0.85rem;
+            color: #888;
+        }
+
+        .cta {
+            padding: 60px 20px;
+            text-align: center;
+        }
+
+        .cta h2 {
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+        }
+
+        .cta p {
+            color: #888;
+            margin-bottom: 2rem;
+        }
+
+        .store-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .store-btn {
+            display: inline-block;
+            padding: 0.8rem 2rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: transform 0.3s ease;
+        }
+
+        .store-btn:hover {
+            transform: translateY(-2px);
+        }
+
+        .store-btn.ios {
+            background: #fff;
+            color: #000;
+        }
+
+        .store-btn.android {
+            background: #3ddc84;
+            color: #000;
+        }
+
+        .store-btn.disabled {
+            background: #333;
+            color: #666;
+            cursor: not-allowed;
+        }
+
+        .footer {
+            padding: 40px 20px;
+            text-align: center;
+            color: #555;
+            font-size: 0.8rem;
+        }
+
+        .footer a {
+            color: #888;
+            text-decoration: none;
+        }
+
+        @media (max-width: 600px) {
+            .logo {
+                font-size: 2.5rem;
+            }
+
+            .subtitle {
+                font-size: 1.2rem;
+            }
+
+            .screenshot {
+                width: 150px;
+                height: 300px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <a href="./" class="back-link">← DAISOTU STUDIO</a>
+    </div>
+
+    <div class="hero">
+        <h1 class="logo">超絶競馬モンスターズ</h1>
+        <p class="subtitle">そだてて、はしって、いっとうしょう！</p>
+        <p class="tagline">モンスターを育てて、自分の手でレースに勝つ。育成レースゲーム</p>
+        <span class="badge">Coming Soon</span>
+    </div>
+
+    <div class="screenshots">
+        <h2>📸 スクリーンショット</h2>
+        <div class="screenshot-container">
+            <div class="screenshot">
+                <img src="monsters_race.jpg" alt="レース画面">
+            </div>
+            <div class="screenshot">
+                <img src="monsters_stable.jpg" alt="馬房（育成）">
+            </div>
+            <div class="screenshot">
+                <img src="monsters_ranch.jpg" alt="牧場">
+            </div>
+            <div class="screenshot">
+                <img src="monsters_race2.jpg" alt="レース画面">
+            </div>
+        </div>
+        <p style="color:#888; font-size:0.8rem; margin-top:1rem;">※ 開発中の画面です。</p>
+    </div>
+
+    <div class="features">
+        <h2>🎮 ゲームの特徴</h2>
+        <div class="feature-grid">
+            <div class="feature">
+                <h3>🏇 自分で乗るレース</h3>
+                <p>スティックで位置を取り、ムチとスキルの使いどころを決める。スタミナと乳酸をどう残すかで、最後の伸びが変わる。</p>
+            </div>
+            <div class="feature">
+                <h3>🐾 60種類以上のモンスター</h3>
+                <p>牧場にやってくるモンスターを仲間にして育成。育て方しだいで、ちがう姿に進化する。</p>
+            </div>
+            <div class="feature">
+                <h3>🧬 交配で血統をつなぐ</h3>
+                <p>走りおえた子は親になる。素質やスキルを受けついだ子で、さらに上のレースへ。</p>
+            </div>
+            <div class="feature">
+                <h3>🏆 重賞からG1、海外へ</h3>
+                <p>全国の競馬場を舞台に、新馬戦からG1、海外の大レースまで。風・坂・馬場の荒れも勝負を分ける。</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="modes">
+        <h2>🕹️ ゲームモード</h2>
+        <div class="mode-list">
+            <div class="mode">
+                <span class="mode-icon">🌱</span>
+                <div class="mode-info">
+                    <h4>育成</h4>
+                    <p>食事・トレーニング・レースで、7日間そだてる</p>
+                </div>
+            </div>
+            <div class="mode">
+                <span class="mode-icon">🌐</span>
+                <div class="mode-info">
+                    <h4>オンラインレース</h4>
+                    <p>育てたモンスターで、ほかのプレイヤーと対戦</p>
+                </div>
+            </div>
+            <div class="mode">
+                <span class="mode-icon">🏁</span>
+                <div class="mode-info">
+                    <h4>練習レース</h4>
+                    <p>好きな競馬場と距離で、自由に走る</p>
+                </div>
+            </div>
+            <div class="mode">
+                <span class="mode-icon">🌾</span>
+                <div class="mode-info">
+                    <h4>牧場</h4>
+                    <p>置き物やえさで、モンスターを呼ぶ</p>
+                </div>
+            </div>
+            <div class="mode">
+                <span class="mode-icon">📖</span>
+                <div class="mode-info">
+                    <h4>図鑑</h4>
+                    <p>出会ったモンスターを集める</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="cta">
+        <h2>ただいま開発中</h2>
+        <p>公開までお待ちください。</p>
+        <div class="store-buttons">
+            <a href="#" class="store-btn disabled">App Store (準備中)</a>
+        </div>
+    </div>
+
+    <div class="footer">
+        <p>&copy; 2025 DAISOTU STUDIO | <a href="privacy.html">プライバシーポリシー</a> | <a href="monsters-terms.html">利用規約</a> | <a href="monsters-legal.html">特定商取引法・資金決済法の表示</a></p>
+    </div>
+</body>
+</html>
