@@ -342,6 +342,45 @@
 
         .end .store { justify-content: center; }
 
+        /* ---------- 広告の募集 ---------- */
+
+        .ads {
+            padding: clamp(48px, 9vw, 110px) 0 0;
+        }
+
+        .ads > h2 {
+            font-family: var(--title);
+            font-weight: 400;
+            font-size: clamp(1.6rem, 4.2vw, 2.6rem);
+            line-height: 1.25;
+        }
+
+        .ads-lead {
+            margin-top: 14px;
+            max-width: 40em;
+            color: var(--soft);
+        }
+
+        .ads-mail {
+            display: inline-flex;
+            flex-direction: column;
+            gap: 2px;
+            margin-top: clamp(20px, 3.5vw, 32px);
+            padding: 14px 26px;
+            border-radius: 14px;
+            border: 1px solid #3a3a50;
+            background: var(--panel);
+            color: var(--ink);
+            font-weight: 900;
+            font-size: 1.05rem;
+            text-decoration: none;
+            transition: border-color .2s, transform .2s;
+        }
+
+        .ads-mail small { font-weight: 500; font-size: .82rem; color: var(--mute); }
+        .ads-mail:hover { border-color: var(--sky); transform: translateY(-2px); }
+        .ads-mail:focus-visible { outline: 2px solid var(--sky); outline-offset: 3px; }
+
         .foot {
             padding: clamp(40px, 7vw, 72px) 0 48px;
             display: grid;
@@ -487,11 +526,23 @@
             </div>
         </section>
 
+        <section class="ads" id="ads">
+            <h2>広告を募集しています</h2>
+            <p class="ads-lead">超絶競馬モンスターズでは、ゲームの中に載せる広告を募集しています。<br>めざしているのは地方創生です。地方の特産品を、ゲームを通じてたくさんの人に知ってもらう場として使っていただけます。</p>
+            <div class="mode-list">
+                <div class="mode"><b>募集しているもの</b><span>地方の特産品・名産品の宣伝</span></div>
+                <div class="mode"><b>載せ方</b><span>ゲームの世界に合う形を、ご相談しながら決めます</span></div>
+                <div class="mode"><b>費用・時期</b><span>内容に合わせてご案内します。まずはお気軽にお問い合わせください</span></div>
+            </div>
+            <a class="ads-mail" href="mailto:contact@daisotu-studio.com?subject=%E5%BA%83%E5%91%8A%E6%8E%B2%E8%BC%89%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A6">広告のご相談はこちら<small>contact@daisotu-studio.com</small></a>
+        </section>
+
         <footer class="foot">
             <nav aria-label="規約など">
                 <a href="monsters-terms.html">利用規約</a>
                 <a href="monsters-legal.html">特定商取引法・資金決済法にもとづく表示</a>
                 <a href="privacy.html">プライバシーポリシー</a>
+                <a href="#ads">広告の募集</a>
                 <a href="studio.html">大卒スタジオのほかのアプリ</a>
             </nav>
             <div>お問い合わせ　<a class="mail" href="mailto:contact@daisotu-studio.com">contact@daisotu-studio.com</a></div>
