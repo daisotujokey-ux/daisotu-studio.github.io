@@ -361,6 +361,18 @@
             color: var(--soft);
         }
 
+        .ads-shots {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 300px));
+            gap: clamp(12px, 3vw, 28px);
+            margin-top: clamp(22px, 4vw, 40px);
+        }
+
+        .ads-shots figure { margin: 0; }
+        .ads-shots img { display: block; width: 100%; height: auto; border-radius: 18px; border: 1px solid #2c2c3d; }
+        .ads-shots figcaption { margin-top: 8px; font-size: .86rem; color: var(--mute); }
+        .ads-note { margin-top: 10px; font-size: .82rem; color: var(--mute); }
+
         .ads-mail {
             display: inline-flex;
             flex-direction: column;
@@ -534,6 +546,11 @@
                 <div class="mode"><b>載せ方</b><span>ゲームの世界に合う形を、ご相談しながら決めます</span></div>
                 <div class="mode"><b>費用・時期</b><span>内容に合わせてご案内します。まずはお気軽にお問い合わせください</span></div>
             </div>
+            <div class="ads-shots">
+                <figure><img src="monsters_ad_goal.jpg" alt="ゴールの瞬間に、大きな広告の看板が映っている画面" loading="lazy"><figcaption>ゴールの瞬間。ゴール板の奥に大きな看板</figcaption></figure>
+                <figure><img src="monsters_ad_stretch.jpg" alt="ゴール前の直線に、広告の看板が並んでいる画面" loading="lazy"><figcaption>ゴール前のリプレイ。直線に看板がならぶ</figcaption></figure>
+            </div>
+            <p class="ads-note">画面は開発中のものです。看板の中身は見本です。</p>
             <p class="ads-lead">ご連絡は、X（旧Twitter）のアカウント「大卒スタジオ <b>@daisotu_studio</b>」までお願いします。</p>
             <a class="ads-mail" href="https://x.com/daisotu_studio" target="_blank" rel="noopener">Xで連絡する<small>大卒スタジオ @daisotu_studio</small></a>
         </section>
