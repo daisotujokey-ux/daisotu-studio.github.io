@@ -472,12 +472,16 @@
 
         @media (max-width: 760px) {
             .hero { grid-template-columns: 1fr; }
-            .sns { grid-template-columns: 1fr; }
             .phones { padding: 18px 0 8px; }
             .step { grid-template-columns: 1fr; }
             .step:nth-child(odd) .step-pic { order: 0; }
             .step-pic img { width: min(72%, 260px); }
             .mode { grid-template-columns: 1fr; }
+        }
+
+        /* iPhone Duo を閉じた時（外側の画面）や、ふつうのスマホ */
+        @media (max-width: 560px) {
+            .sns { grid-template-columns: 1fr; }
         }
 
         @media (max-width: 480px) {
