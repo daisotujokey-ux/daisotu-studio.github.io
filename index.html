@@ -4,9 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>超絶競馬モンスターズ | 大卒スタジオ</title>
-    <meta name="description" content="モンスターを育てて、自分の手でレースに勝つ。牧場で仲間を集め、交配で血統をつなぐ育成レースゲーム「超絶競馬モンスターズ」。">
+    <meta name="description" content="モンスターを育てて、自分の手でレースに勝つ。牧場で仲間を集め、交配で血統をつなぐ育成レースゲーム「超絶競馬モンスターズ」。2026年12月21日、App Storeで配信。基本無料（アプリ内課金あり）。">
     <meta property="og:title" content="超絶競馬モンスターズ">
-    <meta property="og:description" content="そだてて、はしって、いっとうしょう！ 育成レースゲーム。">
+    <meta property="og:description" content="そだてて、はしって、いっとうしょう！ 育成レースゲーム。12月21日配信・基本無料。">
+    <meta property="og:url" content="https://daisotu-studio.com/">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@daisotu_studio">
     <meta property="og:image" content="https://daisotu-studio.com/monsters_icon.jpg">
     <link rel="icon" href="monsters_icon.jpg">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -39,7 +42,12 @@
             line-height: 1.75;
             -webkit-font-smoothing: antialiased;
             overflow-x: hidden;
+            word-break: auto-phrase;   /* 日本語を文節で折り返す（対応しているブラウザだけ） */
+            line-break: strict;
+            text-wrap: pretty;
         }
+
+        img { max-width: 100%; height: auto; }
 
         a { color: inherit; }
 
@@ -340,7 +348,57 @@
 
         .end p { margin-top: 12px; color: var(--soft); }
 
+        .nb { display: inline-block; }
+
         .end .store { justify-content: center; }
+
+        .release {
+            color: var(--soft);
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        .release b {
+            display: block;
+            font-size: 1.15rem;
+            color: var(--ink);
+            font-weight: 900;
+        }
+
+        .end .release { text-align: left; }
+
+        /* ---------- SNS ---------- */
+
+        .sns {
+            margin-top: clamp(26px, 4vw, 40px);
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 12px;
+            text-align: left;
+        }
+
+        .sns-title {
+            margin-top: clamp(30px, 5vw, 48px);
+            font-weight: 900;
+            font-size: 1.05rem;
+        }
+
+        .sns a {
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+            min-height: 64px;
+            padding: 14px 18px;
+            border-radius: 14px;
+            border: 1px solid #3a3a50;
+            background: rgba(8, 8, 12, .55);
+            text-decoration: none;
+            transition: border-color .2s, transform .2s;
+        }
+
+        .sns a b { font-size: 1.05rem; }
+        .sns a small { color: var(--mute); font-size: 0.82rem; overflow-wrap: anywhere; }
+        .sns a:hover { border-color: var(--sky); transform: translateY(-2px); }
 
         /* ---------- 広告の募集 ---------- */
 
@@ -414,6 +472,7 @@
 
         @media (max-width: 760px) {
             .hero { grid-template-columns: 1fr; }
+            .sns { grid-template-columns: 1fr; }
             .phones { padding: 18px 0 8px; }
             .step { grid-template-columns: 1fr; }
             .step:nth-child(odd) .step-pic { order: 0; }
@@ -421,7 +480,17 @@
             .mode { grid-template-columns: 1fr; }
         }
 
+        @media (max-width: 480px) {
+            .bar { font-size: 0.82rem; }
+            .store { flex-direction: column; align-items: flex-start; }
+            .end .store { align-items: center; }
+            .end .release { text-align: center; }
+            .ads-shots { grid-template-columns: 1fr; max-width: 360px; }
+            .phones { gap: 10px; }
+        }
+
         @media (prefers-reduced-motion: reduce) {
+            .sns a, .ads-mail { transition: none; }
             .lane { animation: none; }
             html { scroll-behavior: auto; }
         }
@@ -439,7 +508,7 @@
                 <div>
                     <div class="hero-id">
                         <img src="monsters_icon.jpg" alt="超絶競馬モンスターズのアイコン">
-                        <span class="state">開発中</span>
+                        <span class="state" data-after="配信中">12月21日配信</span>
                     </div>
                     <h1><span class="a">超絶競馬</span><span class="b">モンスターズ</span></h1>
                     <p class="catch">そだてて、はしって、いっとうしょう！</p>
@@ -450,7 +519,7 @@
                     </div>
                     <div class="store">
                         <span class="store-btn"><small>iPhone・iPad</small><b>App Store</b></span>
-                        <p>公開の準備をしています</p>
+                        <p class="release"><b>2026年12月21日 配信</b>基本無料（アプリ内課金あり）</p>
                     </div>
                 </div>
                 <div class="phones">
@@ -530,11 +599,17 @@
         </section>
 
         <section class="end">
-            <h2>いっとうしょうを、とりにいこう</h2>
-            <p>ただいま開発中です。公開までお待ちください。</p>
+            <h2>いっとうしょうを、<span class="nb">とりにいこう</span></h2>
+            <p>2026年12月21日、App Storeで配信します。基本無料で遊べます。</p>
             <div class="store">
                 <span class="store-btn"><small>iPhone・iPad</small><b>App Store</b></span>
-                <p>公開の準備をしています</p>
+                <p class="release"><b>2026年12月21日 配信</b>基本無料（アプリ内課金あり）</p>
+            </div>
+            <p class="sns-title">レースの動画や最新情報はこちら</p>
+            <div class="sns">
+                <a href="https://x.com/daisotu_studio" target="_blank" rel="noopener"><b>X</b><small>@daisotu_studio</small></a>
+                <a href="https://www.tiktok.com/@samusondd" target="_blank" rel="noopener"><b>TikTok</b><small>@samusondd</small></a>
+                <a href="https://www.youtube.com/channel/UCv27mq18242o-rt0yvkju4A" target="_blank" rel="noopener"><b>YouTube</b><small>大卒スタジオ</small></a>
             </div>
         </section>
 
@@ -565,8 +640,15 @@
             </nav>
             <div>お問い合わせ　<a class="mail" href="mailto:contact@daisotu-studio.com">contact@daisotu-studio.com</a></div>
             <div>X（旧Twitter）　<a class="mail" href="https://x.com/daisotu_studio" target="_blank" rel="noopener">大卒スタジオ @daisotu_studio</a></div>
+            <div>TikTok　<a class="mail" href="https://www.tiktok.com/@samusondd" target="_blank" rel="noopener">@samusondd</a>　YouTube　<a class="mail" href="https://www.youtube.com/channel/UCv27mq18242o-rt0yvkju4A" target="_blank" rel="noopener">大卒スタジオ</a></div>
             <div>&copy; 2025 DAISOTU STUDIO（大卒スタジオ）</div>
         </footer>
     </main>
+    <script>
+        // 配信日（日本時間 2026-12-21 0時）を過ぎたら「配信中」に切りかえる
+        if (Date.now() >= Date.parse('2026-12-21T00:00:00+09:00')) {
+            document.querySelectorAll('[data-after]').forEach(function (el) { el.textContent = el.dataset.after; });
+        }
+    </script>
 </body>
 </html>
