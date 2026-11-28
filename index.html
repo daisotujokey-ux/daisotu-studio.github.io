@@ -2,636 +2,661 @@
 <html lang="ja">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <title>超絶競馬モンスターズ | 大卒スタジオ</title>
     <meta name="description" content="モンスターを育てて、自分の手でレースに勝つ。牧場で仲間を集め、交配で血統をつなぐ育成レースゲーム「超絶競馬モンスターズ」。2026年12月21日、App Storeで配信。基本無料（アプリ内課金あり）。">
     <meta property="og:title" content="超絶競馬モンスターズ">
     <meta property="og:description" content="そだてて、はしって、いっとうしょう！ 育成レースゲーム。12月21日配信・基本無料。">
+    <meta property="og:image" content="https://daisotu-studio.com/monsters_icon.jpg">
     <meta property="og:url" content="https://daisotu-studio.com/">
     <meta name="twitter:card" content="summary">
     <meta name="twitter:site" content="@daisotu_studio">
-    <meta property="og:image" content="https://daisotu-studio.com/monsters_icon.jpg">
+    <meta name="theme-color" content="#f3eee2">
     <link rel="icon" href="monsters_icon.jpg">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Dela+Gothic+One&family=Zen+Kaku+Gothic+New:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Dela+Gothic+One&family=BIZ+UDPGothic:wght@400;700&family=BIZ+UDGothic:wght@700&display=swap" rel="stylesheet">
     <style>
+        /*
+          競馬新聞の出馬表をもとにしたデザイン。
+          色は、紙・墨・赤の印と、枠番の8色だけを使う。
+          グラデーション・光る影・ぼかしは使わない。
+        */
         :root {
-            --bg: #08080c;
-            --panel: #12121a;
-            --line: #25253200;
-            --rule: #262633;
-            --ink: #f4f2f8;
-            --soft: #c8c6d2;
-            --mute: #8b8a99;
-            --sky: #39a0ff;      /* アイコンの左：白いロボと青い空 */
-            --dark: #b44cff;     /* アイコンの右：黒いロボと紫の闇 */
-            --hot: #ff3d5a;      /* 目の赤 */
-            --title: 'Dela Gothic One', 'Zen Kaku Gothic New', sans-serif;
-            --jp: 'Zen Kaku Gothic New', -apple-system, BlinkMacSystemFont, 'Hiragino Sans', 'Yu Gothic', sans-serif;
+            --paper: #f3eee2;
+            --ink: #1b1a17;
+            --ink2: #4a463d;
+            --rule: #1b1a17;
+            --thin: #b9b09b;
+            --red: #d0201a;     /* 本命の印 */
+            --w1: #ffffff; --w2: #1b1a17; --w3: #e3241b; --w4: #1d5fae;
+            --head: 'Dela Gothic One', 'Hiragino Kaku Gothic StdN', 'Hiragino Sans', 'Yu Gothic', sans-serif;
+            --body: 'BIZ UDPGothic', 'Hiragino Kaku Gothic ProN', 'Hiragino Sans', 'Yu Gothic', 'Meiryo', sans-serif;
+            --num: 'BIZ UDGothic', 'Hiragino Kaku Gothic ProN', 'Hiragino Sans', monospace;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
 
-        html { scroll-behavior: smooth; }
+        html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
 
         body {
-            font-family: var(--jp);
-            background: var(--bg);
+            font-family: var(--body);
+            background: var(--paper);
             color: var(--ink);
-            line-height: 1.75;
-            -webkit-font-smoothing: antialiased;
-            overflow-x: hidden;
+            line-height: 1.8;
             word-break: auto-phrase;   /* 日本語を文節で折り返す（対応しているブラウザだけ） */
             line-break: strict;
             text-wrap: pretty;
+            overflow-x: hidden;
         }
 
-        img { max-width: 100%; height: auto; }
-
+        img { display: block; max-width: 100%; height: auto; }
         a { color: inherit; }
+        a:focus-visible { outline: 3px solid var(--red); outline-offset: 3px; }
 
-        a:focus-visible {
-            outline: 2px solid var(--ink);
-            outline-offset: 4px;
-            border-radius: 4px;
-        }
-
-        .wrap {
-            width: min(1080px, 100% - 44px);
+        .sheet {
+            width: min(1120px, 100% - 32px);
             margin: 0 auto;
+            padding-left: env(safe-area-inset-left);
+            padding-right: env(safe-area-inset-right);
         }
 
-        /* ---------- いちばん上 ---------- */
+        /* ---------- 題字（新聞のいちばん上） ---------- */
 
-        .top {
-            position: relative;
-            overflow: hidden;
-        }
-
-        /* アイコンと同じ、青と紫が左右からぶつかる光 */
-        .top::before {
-            content: '';
-            position: absolute;
-            inset: -20% -10% auto -10%;
-            height: 120%;
-            background:
-                radial-gradient(46% 60% at 12% 30%, rgba(57, 160, 255, .34) 0%, rgba(57, 160, 255, 0) 70%),
-                radial-gradient(46% 60% at 88% 26%, rgba(180, 76, 255, .34) 0%, rgba(180, 76, 255, 0) 70%);
-            pointer-events: none;
-        }
-
-        .bar {
-            position: relative;
+        .topline {
             display: flex;
-            align-items: center;
             justify-content: space-between;
-            padding: 22px 0;
-            font-size: 0.9rem;
-            color: var(--mute);
+            gap: 12px;
+            padding: 10px 0;
+            font-size: .82rem;
+            color: var(--ink2);
+            border-bottom: 1px solid var(--rule);
         }
 
-        .bar a { text-decoration: none; transition: color .2s; }
-        .bar a:hover { color: var(--ink); }
+        .topline nav { display: flex; gap: 18px; }
+        .topline a { text-decoration: none; }
+        .topline a:hover { text-decoration: underline; }
 
-        .hero {
-            position: relative;
+        .masthead {
+            border-bottom: 6px double var(--rule);
+            padding: clamp(18px, 3vw, 30px) 0 clamp(14px, 2.4vw, 22px);
             display: grid;
-            grid-template-columns: 1.15fr 0.85fr;
-            gap: clamp(20px, 4vw, 56px);
+            grid-template-columns: auto 1fr auto;
+            gap: clamp(14px, 2.6vw, 28px);
             align-items: center;
-            padding: clamp(28px, 6vw, 72px) 0 clamp(48px, 8vw, 96px);
         }
 
-        .hero-id {
-            display: flex;
-            align-items: center;
-            gap: 14px;
-            margin-bottom: clamp(18px, 3vw, 30px);
-        }
-
-        .hero-id img {
-            width: 68px;
-            height: 68px;
-            border-radius: 16px;
-            box-shadow: 0 0 0 1px rgba(255, 255, 255, .14), 0 14px 34px -10px rgba(120, 90, 255, .7);
-        }
-
-        .state {
-            font-size: 0.82rem;
-            font-weight: 700;
-            padding: 4px 14px;
-            border-radius: 999px;
-            color: #0b0b12;
-            background: linear-gradient(90deg, var(--sky), var(--dark));
+        .masthead .icon {
+            width: clamp(64px, 9vw, 104px);
+            border: 2px solid var(--ink);
         }
 
         h1 {
-            font-family: var(--title);
+            font-family: var(--head);
             font-weight: 400;
-            font-size: clamp(2.7rem, 6.8vw, 5rem);
-            line-height: 1.12;
-            letter-spacing: 0.01em;
+            font-size: clamp(2.1rem, 7.4vw, 5.6rem);
+            line-height: 1.05;
+            letter-spacing: -.01em;
         }
 
-        h1 span { display: block; white-space: nowrap; }
-
-        h1 .a {
-            background: linear-gradient(90deg, #ffffff 0%, #9fd0ff 100%);
-            -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
+        h1 small {
+            display: block;
+            font-family: var(--body);
+            font-weight: 700;
+            font-size: clamp(.8rem, 1.6vw, 1rem);
+            letter-spacing: .2em;
+            margin-bottom: .5em;
         }
 
-        h1 .b {
-            background: linear-gradient(90deg, #7fb8ff 0%, #c06bff 55%, #ff5c8a 100%);
-            -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
+        /* 赤い判子：配信日 */
+        .stamp {
+            justify-self: end;
+            display: grid;
+            place-items: center;
+            text-align: center;
+            width: clamp(96px, 13vw, 140px);
+            aspect-ratio: 1;
+            border: 3px solid var(--red);
+            border-radius: 50%;
+            color: var(--red);
+            font-weight: 700;
+            line-height: 1.15;
+            transform: rotate(-8deg);
+        }
+
+        .stamp b { font-family: var(--num); font-size: clamp(1.4rem, 2.6vw, 2rem); display: block; }
+        .stamp span { font-size: clamp(.72rem, 1.2vw, .9rem); }
+
+        .dateline {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            gap: 4px 20px;
+            padding: 8px 0;
+            border-bottom: 1px solid var(--rule);
+            font-size: .9rem;
+        }
+
+        .dateline b { font-family: var(--num); }
+
+        /* ---------- 1面 ---------- */
+
+        .front {
+            display: grid;
+            grid-template-columns: 1.05fr .95fr;
+            gap: clamp(20px, 4vw, 48px);
+            padding: clamp(24px, 4vw, 44px) 0;
+            border-bottom: 2px solid var(--rule);
         }
 
         .catch {
-            margin-top: clamp(16px, 2.6vw, 26px);
-            font-size: clamp(1.1rem, 2.3vw, 1.5rem);
-            font-weight: 900;
+            font-family: var(--head);
+            font-weight: 400;
+            font-size: clamp(1.5rem, 3.6vw, 2.6rem);
+            line-height: 1.3;
         }
 
         .lead {
-            margin-top: 12px;
-            max-width: 27em;
-            color: var(--soft);
+            margin-top: 14px;
+            font-size: clamp(1rem, 1.6vw, 1.1rem);
+            max-width: 30em;
         }
 
-        /* 2本の線がゴールへ走りこむ */
-        .lanes {
-            margin-top: clamp(22px, 3.6vw, 36px);
+        .release {
+            margin-top: clamp(22px, 3.4vw, 34px);
+            border: 2px solid var(--ink);
+            background: var(--w1);
+        }
+
+        .release-row {
             display: grid;
-            gap: 7px;
-            max-width: 520px;
+            grid-template-columns: 7em 1fr;
+            border-bottom: 1px solid var(--ink);
         }
 
-        .lane {
-            height: 5px;
-            border-radius: 3px;
-            transform-origin: left center;
-            animation: run 1.5s cubic-bezier(.2, .7, .1, 1) both;
-        }
-
-        .lane.s { background: linear-gradient(90deg, rgba(57, 160, 255, .2), var(--sky)); width: 100%; animation-delay: .25s; animation-duration: 1.7s; }
-        .lane.d { background: linear-gradient(90deg, rgba(180, 76, 255, .2), var(--dark)); width: 93%; animation-delay: .1s; animation-duration: 1.35s; }
-
-        @keyframes run { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+        .release-row:last-child { border-bottom: 0; }
+        .release-row > * { padding: 9px 14px; }
+        .release-row dt { background: var(--ink); color: var(--paper); font-weight: 700; font-size: .9rem; display: flex; align-items: center; }
+        .release-row dd { font-weight: 700; }
+        .release-row dd .big { font-family: var(--num); font-size: 1.25rem; }
 
         .store {
-            margin-top: clamp(22px, 3.6vw, 36px);
+            margin-top: 16px;
             display: flex;
             flex-wrap: wrap;
+            gap: 10px 16px;
             align-items: center;
-            gap: 12px 18px;
         }
 
         .store-btn {
             display: inline-flex;
             flex-direction: column;
-            padding: 10px 26px;
-            border-radius: 14px;
-            border: 1px solid #3b3b4d;
-            background: #14141d;
-            color: var(--mute);
-            line-height: 1.3;
+            line-height: 1.25;
+            padding: 10px 22px;
+            background: var(--ink);
+            color: var(--paper);
+            text-decoration: none;
+            border: 2px solid var(--ink);
         }
 
-        .store-btn b { font-size: 1.1rem; color: var(--soft); }
-        .store-btn small { font-size: 0.75rem; }
+        .store-btn small { font-size: .72rem; }
+        .store-btn b { font-size: 1.15rem; }
+        .store-btn[aria-disabled="true"] { cursor: default; }
+        .store p { font-size: .88rem; color: var(--ink2); }
 
-        .store p { color: var(--mute); font-size: 0.9rem; }
+        /* 写真（新聞の写真欄） */
+        .photos {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            align-self: start;
+        }
 
-        .phones {
-            position: relative;
+        .photos figure { border: 1px solid var(--ink); background: var(--w1); padding: 6px 6px 0; }
+        .photos figcaption { font-size: .78rem; padding: 6px 2px 7px; color: var(--ink2); }
+        .photos figcaption b { color: var(--ink); }
+
+        /* ---------- 出馬表 ---------- */
+
+        .card { padding: clamp(30px, 5vw, 56px) 0 0; }
+
+        .sec-head {
             display: flex;
-            justify-content: center;
-            gap: 16px;
+            align-items: baseline;
+            justify-content: space-between;
+            gap: 12px;
+            border-bottom: 4px solid var(--ink);
+            padding-bottom: 6px;
         }
 
-        .phones img {
-            width: min(47%, 230px);
-            border-radius: 20px;
-            border: 1px solid rgba(255, 255, 255, .14);
-            box-shadow: 0 30px 60px -22px rgba(0, 0, 0, .95);
-        }
-
-        .phones img:first-child { transform: translateY(22px) rotate(-4deg); box-shadow: 0 30px 60px -22px rgba(0, 0, 0, .95), -18px 0 60px -30px var(--sky); }
-        .phones img:last-child { transform: translateY(-14px) rotate(3deg); box-shadow: 0 30px 60px -22px rgba(0, 0, 0, .95), 18px 0 60px -30px var(--dark); }
-
-        /* ---------- あそび方 ---------- */
-
-        .play {
-            padding: clamp(40px, 8vw, 96px) 0 0;
-        }
-
-        .play > h2, .modes > h2 {
-            font-family: var(--title);
+        h2 {
+            font-family: var(--head);
             font-weight: 400;
-            font-size: clamp(1.6rem, 4.2vw, 2.6rem);
+            font-size: clamp(1.5rem, 3.6vw, 2.4rem);
             line-height: 1.25;
         }
 
-        .step {
+        .sec-head span { font-size: .82rem; color: var(--ink2); }
+
+        .runner {
             display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: clamp(22px, 5vw, 72px);
-            align-items: center;
-            padding: clamp(36px, 7vw, 84px) 0;
-            border-bottom: 1px solid var(--rule);
+            grid-template-columns: 58px 150px 1fr 54px;
+            border-bottom: 1px solid var(--ink);
         }
 
-        .step:last-child { border-bottom: 0; }
+        .runner > * { padding: clamp(14px, 2vw, 20px) clamp(12px, 1.8vw, 20px); }
+        .runner > * + * { border-left: 1px solid var(--thin); }
 
-        .step:nth-child(odd) .step-pic { order: 2; }
-
-        .step-pic {
-            display: flex;
-            justify-content: center;
-        }
-
-        .step-pic img {
-            width: min(100%, 300px);
-            border-radius: 22px;
-            border: 1px solid rgba(255, 255, 255, .12);
-            box-shadow: 0 34px 70px -30px var(--glow, #000);
-        }
-
-        .step h3 {
-            font-size: clamp(1.45rem, 3.4vw, 2.2rem);
-            font-weight: 900;
-            line-height: 1.35;
-        }
-
-        .step h3 em {
-            font-style: normal;
-            display: block;
-            font-size: 0.95rem;
-            font-weight: 700;
-            color: var(--c);
-            margin-bottom: 6px;
-        }
-
-        .step p {
-            margin-top: 14px;
-            color: var(--soft);
-            max-width: 26em;
-        }
-
-        .step ul {
-            margin-top: 16px;
-            list-style: none;
+        .waku {
             display: grid;
-            gap: 8px;
-            color: var(--soft);
+            justify-items: center;
+            align-content: start;
+            gap: 6px;
+            font-size: .72rem;
+            color: var(--ink2);
         }
 
-        .step li {
-            padding-left: 20px;
-            position: relative;
-        }
-
-        .step li::before {
-            content: '';
-            position: absolute;
-            left: 0;
-            top: 0.72em;
-            width: 10px;
-            height: 3px;
-            border-radius: 2px;
-            background: var(--c);
-        }
-
-        /* ---------- モード ---------- */
-
-        .modes {
-            padding: clamp(48px, 9vw, 110px) 0 0;
-        }
-
-        .mode-list {
-            margin-top: clamp(18px, 3vw, 30px);
-            border-top: 2px solid;
-            border-image: linear-gradient(90deg, var(--sky), var(--dark)) 1;
-        }
-
-        .mode {
+        .waku b {
             display: grid;
-            grid-template-columns: minmax(8em, 15em) 1fr;
-            gap: 8px 24px;
-            padding: 18px 4px;
-            border-bottom: 1px solid var(--rule);
+            place-items: center;
+            width: 38px;
+            height: 38px;
+            font-family: var(--num);
+            font-size: 1.3rem;
+            border: 1px solid var(--ink);
+            background: var(--wc);
+            color: var(--wt, var(--ink));
         }
 
-        .mode b { font-size: 1.15rem; }
-        .mode span { color: var(--soft); }
+        .runner .pic img { width: 100%; max-width: 120px; border: 1px solid var(--ink); }
 
-        /* ---------- おわり ---------- */
-
-        .end {
-            margin-top: clamp(56px, 10vw, 120px);
-            padding: clamp(36px, 7vw, 76px) clamp(22px, 5vw, 60px);
-            border-radius: 26px;
-            border: 1px solid #2c2c3d;
-            background:
-                radial-gradient(70% 120% at 0% 0%, rgba(57, 160, 255, .2) 0%, rgba(57, 160, 255, 0) 60%),
-                radial-gradient(70% 120% at 100% 100%, rgba(180, 76, 255, .22) 0%, rgba(180, 76, 255, 0) 60%),
-                var(--panel);
-            text-align: center;
-        }
-
-        .end h2 {
-            font-family: var(--title);
+        .runner h3 {
+            font-family: var(--head);
             font-weight: 400;
-            font-size: clamp(1.5rem, 4.4vw, 2.6rem);
+            font-size: clamp(1.3rem, 2.6vw, 1.8rem);
             line-height: 1.3;
         }
 
-        .end p { margin-top: 12px; color: var(--soft); }
+        .runner h3 small {
+            display: inline-block;
+            font-family: var(--body);
+            font-weight: 700;
+            font-size: .8rem;
+            padding: 1px 8px;
+            margin-bottom: 6px;
+            border: 1px solid var(--ink);
+            vertical-align: middle;
+        }
 
+        .runner p { margin-top: 10px; max-width: 34em; }
+
+        .runner ul { margin-top: 10px; list-style: none; display: grid; gap: 4px; }
+        .runner li { padding-left: 1.3em; position: relative; }
+        .runner li::before { content: '・'; position: absolute; left: 0; }
+
+        /* 印 ◎○▲△ */
+        .mark {
+            display: grid;
+            justify-items: center;
+            align-content: start;
+            font-size: 1.9rem;
+            line-height: 1;
+            color: var(--red);
+        }
+
+        .mark small { font-size: .68rem; color: var(--ink2); margin-top: 6px; }
+
+        /* ---------- あそべること（成績表ふう） ---------- */
+
+        table.modes {
+            width: 100%;
+            border-collapse: collapse;
+            background: var(--w1);
+        }
+
+        .modes th, .modes td {
+            text-align: left;
+            padding: 12px 14px;
+            border-bottom: 1px solid var(--ink);
+            vertical-align: top;
+        }
+
+        .modes thead th { background: var(--ink); color: var(--paper); font-size: .82rem; }
+        .modes tbody th { width: 13em; white-space: nowrap; }
+        .modes tbody th i { font-style: normal; font-family: var(--num); margin-right: .6em; }
+
+        /* ---------- 発走（掲示板） ---------- */
+
+        .post {
+            margin-top: clamp(36px, 6vw, 64px);
+            background: var(--ink);
+            color: var(--paper);
+            display: grid;
+            grid-template-columns: auto 1fr;
+            border: 2px solid var(--ink);
+        }
+
+        .board {
+            background: #0d0d0c;
+            padding: clamp(18px, 3vw, 30px) clamp(20px, 3.4vw, 36px);
+            display: grid;
+            align-content: center;
+            gap: 6px;
+            border-right: 1px solid #3b3a36;
+        }
+
+        .board .label { font-size: .8rem; color: #b8b2a2; letter-spacing: .1em; }
+
+        .board .digits {
+            font-family: var(--num);
+            font-size: clamp(2.2rem, 5.6vw, 3.6rem);
+            line-height: 1;
+            color: #ffb000;
+            letter-spacing: .04em;
+            white-space: nowrap;
+        }
+
+        .board .digits small { font-size: .4em; margin-left: .2em; }
+
+        .post-body { padding: clamp(18px, 3vw, 30px) clamp(18px, 3.4vw, 36px); }
+        .post-body h2 { color: var(--paper); }
+        .post-body p { margin-top: 8px; color: #ded8c8; }
         .nb { display: inline-block; }
 
-        .end .store { justify-content: center; }
+        .post .store-btn { background: var(--paper); color: var(--ink); border-color: var(--paper); }
 
-        .release {
-            color: var(--soft);
-            font-size: 0.95rem;
-            line-height: 1.6;
-        }
-
-        .release b {
-            display: block;
-            font-size: 1.15rem;
-            color: var(--ink);
-            font-weight: 900;
-        }
-
-        .end .release { text-align: left; }
-
-        /* ---------- SNS ---------- */
-
+        /* SNS */
         .sns {
-            margin-top: clamp(26px, 4vw, 40px);
+            margin-top: 18px;
             display: grid;
             grid-template-columns: repeat(3, minmax(0, 1fr));
-            gap: 12px;
-            text-align: left;
-        }
-
-        .sns-title {
-            margin-top: clamp(30px, 5vw, 48px);
-            font-weight: 900;
-            font-size: 1.05rem;
+            border: 1px solid var(--paper);
         }
 
         .sns a {
-            display: flex;
-            flex-direction: column;
-            gap: 2px;
-            min-height: 64px;
-            padding: 14px 18px;
-            border-radius: 14px;
-            border: 1px solid #3a3a50;
-            background: rgba(8, 8, 12, .55);
+            display: grid;
+            padding: 12px 16px;
             text-decoration: none;
-            transition: border-color .2s, transform .2s;
+            line-height: 1.4;
         }
 
+        .sns a + a { border-left: 1px solid var(--paper); }
         .sns a b { font-size: 1.05rem; }
-        .sns a small { color: var(--mute); font-size: 0.82rem; overflow-wrap: anywhere; }
-        .sns a:hover { border-color: var(--sky); transform: translateY(-2px); }
+        .sns a small { font-size: .8rem; color: #b8b2a2; overflow-wrap: anywhere; }
+        .sns a:hover { background: var(--paper); color: var(--ink); }
+        .sns a:hover small { color: var(--ink2); }
 
         /* ---------- 広告の募集 ---------- */
 
-        .ads {
-            padding: clamp(48px, 9vw, 110px) 0 0;
-        }
+        .ads { padding: clamp(40px, 7vw, 80px) 0 0; }
 
-        .ads > h2 {
-            font-family: var(--title);
-            font-weight: 400;
-            font-size: clamp(1.6rem, 4.2vw, 2.6rem);
-            line-height: 1.25;
-        }
-
-        .ads-lead {
-            margin-top: 14px;
-            max-width: 40em;
-            color: var(--soft);
-        }
-
-        .ads-shots {
+        .ads-body {
             display: grid;
-            grid-template-columns: repeat(2, minmax(0, 300px));
-            gap: clamp(12px, 3vw, 28px);
-            margin-top: clamp(22px, 4vw, 40px);
+            grid-template-columns: 1.1fr .9fr;
+            gap: clamp(20px, 4vw, 44px);
+            margin-top: 18px;
         }
 
-        .ads-shots figure { margin: 0; }
-        .ads-shots img { display: block; width: 100%; height: auto; border-radius: 18px; border: 1px solid #2c2c3d; }
-        .ads-shots figcaption { margin-top: 8px; font-size: .86rem; color: var(--mute); }
-        .ads-note { margin-top: 10px; font-size: .82rem; color: var(--mute); }
+        .ads-body p { max-width: 36em; }
+        .ads-body p + p { margin-top: 12px; }
+
+        .ads table { width: 100%; margin-top: 18px; border-collapse: collapse; border-top: 2px solid var(--ink); }
+        .ads th, .ads td { text-align: left; vertical-align: top; padding: 10px 8px; border-bottom: 1px solid var(--ink); }
+        .ads th { width: 8.5em; font-size: .9rem; }
+
+        .ads-shots { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; align-self: start; max-width: 400px; }
+        .ads-shots figure { border: 1px solid var(--ink); background: var(--w1); padding: 6px 6px 0; }
+        .ads-shots figcaption { font-size: .78rem; padding: 6px 2px 7px; color: var(--ink2); }
+        .ads-note { margin-top: 8px; font-size: .8rem; color: var(--ink2); }
 
         .ads-mail {
             display: inline-flex;
             flex-direction: column;
-            gap: 2px;
-            margin-top: clamp(20px, 3.5vw, 32px);
-            padding: 14px 26px;
-            border-radius: 14px;
-            border: 1px solid #3a3a50;
-            background: var(--panel);
-            color: var(--ink);
-            font-weight: 900;
-            font-size: 1.05rem;
+            margin-top: 16px;
+            padding: 10px 22px;
+            line-height: 1.35;
+            border: 2px solid var(--ink);
             text-decoration: none;
-            transition: border-color .2s, transform .2s;
+            font-weight: 700;
         }
 
-        .ads-mail small { font-weight: 500; font-size: .82rem; color: var(--mute); }
-        .ads-mail:hover { border-color: var(--sky); transform: translateY(-2px); }
-        .ads-mail:focus-visible { outline: 2px solid var(--sky); outline-offset: 3px; }
+        .ads-mail small { font-weight: 400; font-size: .8rem; color: var(--ink2); }
+        .ads-mail:hover { background: var(--ink); color: var(--paper); }
+        .ads-mail:hover small { color: var(--paper); }
+
+        /* ---------- 下 ---------- */
 
         .foot {
-            padding: clamp(40px, 7vw, 72px) 0 48px;
+            margin-top: clamp(44px, 7vw, 80px);
+            padding: 18px 0 calc(36px + env(safe-area-inset-bottom));
+            border-top: 6px double var(--rule);
             display: grid;
-            gap: 18px;
-            color: var(--mute);
-            font-size: 0.9rem;
+            gap: 10px;
+            font-size: .88rem;
         }
 
-        .foot nav {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 8px 22px;
+        .foot nav { display: flex; flex-wrap: wrap; gap: 6px 20px; }
+        .foot a { text-underline-offset: 3px; }
+        .foot .info { display: flex; flex-wrap: wrap; gap: 4px 22px; color: var(--ink2); }
+        .foot .info a { color: var(--ink); font-weight: 700; }
+
+        /* ---------- 画面の幅ごと ---------- */
+
+        /* タブレット・iPhone Duo を開いた時 */
+        @media (max-width: 900px) {
+            .front { grid-template-columns: 1fr; }
+            .photos { max-width: 560px; }
+            .runner { grid-template-columns: 52px 130px 1fr; }
+            .runner .mark { display: none; }
+            .ads-body { grid-template-columns: 1fr; }
+            .ads-shots { max-width: 560px; }
         }
 
-        .foot a { text-decoration: none; transition: color .2s; }
-        .foot a:hover { color: var(--ink); }
-
-        .foot .mail { color: var(--soft); font-weight: 700; }
-
-        @media (max-width: 760px) {
-            .hero { grid-template-columns: 1fr; }
-            .phones { padding: 18px 0 8px; }
-            .step { grid-template-columns: 1fr; }
-            .step:nth-child(odd) .step-pic { order: 0; }
-            .step-pic img { width: min(72%, 260px); }
-            .mode { grid-template-columns: 1fr; }
-        }
-
-        /* iPhone Duo を閉じた時（外側の画面）や、ふつうのスマホ */
-        @media (max-width: 560px) {
+        /* スマホ・iPhone Duo を閉じた時 */
+        @media (max-width: 600px) {
+            .topline nav a:not(:first-child) { display: none; }
+            .masthead { grid-template-columns: auto 1fr; row-gap: 10px; }
+            .masthead .icon { width: 64px; grid-row: 1; grid-column: 1; }
+            .stamp { grid-row: 1; grid-column: 2; width: 84px; }
+            .masthead h1 { grid-row: 2; grid-column: 1 / -1; font-size: clamp(2.3rem, 12vw, 3.4rem); }
+            .runner { grid-template-columns: 40px minmax(0, 1fr) clamp(72px, 24vw, 110px); }
+            .runner > * { padding: 14px 10px; }
+            .waku b { width: 32px; height: 32px; font-size: 1.1rem; }
+            .runner .waku { grid-row: 1; grid-column: 1; }
+            .runner .text { grid-row: 1; grid-column: 2; }
+            .runner .pic { grid-row: 1; grid-column: 3; padding-left: 0; border-left: 0; }
+            .runner .pic img { max-width: 100%; }
+            .runner h3 { font-size: 1.2rem; }
+            .modes tbody th { width: auto; white-space: normal; }
+            .modes thead { display: none; }
+            .modes tr { display: block; border-bottom: 1px solid var(--ink); }
+            .modes th, .modes td { display: block; border: 0; padding: 0 12px; }
+            .modes tbody th { padding-top: 12px; }
+            .modes td { padding-bottom: 12px; }
+            .post { grid-template-columns: 1fr; }
+            .board { border-right: 0; border-bottom: 1px solid #3b3a36; }
             .sns { grid-template-columns: 1fr; }
-        }
-
-        @media (max-width: 480px) {
-            .bar { font-size: 0.82rem; }
-            .store { flex-direction: column; align-items: flex-start; }
-            .end .store { align-items: center; }
-            .end .release { text-align: center; }
-            .ads-shots { grid-template-columns: 1fr; max-width: 360px; }
-            .phones { gap: 10px; }
+            .sns a + a { border-left: 0; border-top: 1px solid var(--paper); }
+            .release-row { grid-template-columns: 5.5em 1fr; }
+            .ads th { width: 6.5em; }
         }
 
         @media (prefers-reduced-motion: reduce) {
-            .sns a, .ads-mail { transition: none; }
-            .lane { animation: none; }
             html { scroll-behavior: auto; }
         }
     </style>
 </head>
 <body>
-    <div class="top">
-        <div class="wrap">
-            <div class="bar">
-                <span>大卒スタジオのゲーム</span>
-                <a href="#play">どんなゲーム？</a>
-            </div>
-
-            <header class="hero">
-                <div>
-                    <div class="hero-id">
-                        <img src="monsters_icon.jpg" alt="超絶競馬モンスターズのアイコン">
-                        <span class="state" data-after="配信中">12月21日配信</span>
-                    </div>
-                    <h1><span class="a">超絶競馬</span><span class="b">モンスターズ</span></h1>
-                    <p class="catch">そだてて、はしって、いっとうしょう！</p>
-                    <p class="lead">モンスターを育てて、自分の手でレースに勝つ。育成レースゲームです。</p>
-                    <div class="lanes" aria-hidden="true">
-                        <div class="lane s"></div>
-                        <div class="lane d"></div>
-                    </div>
-                    <div class="store">
-                        <span class="store-btn"><small>iPhone・iPad</small><b>App Store</b></span>
-                        <p class="release"><b>2026年12月21日 配信</b>基本無料（アプリ内課金あり）</p>
-                    </div>
-                </div>
-                <div class="phones">
-                    <img src="monsters_race.jpg" alt="レースの画面">
-                    <img src="monsters_stable.jpg" alt="育成の画面">
-                </div>
-            </header>
+    <div class="sheet">
+        <div class="topline">
+            <span>大卒スタジオのゲーム</span>
+            <nav aria-label="ページ内">
+                <a href="#card">どんなゲーム？</a>
+                <a href="#post">配信日</a>
+                <a href="#ads">広告の募集</a>
+            </nav>
         </div>
-    </div>
 
-    <main class="wrap">
-        <section class="play" id="play">
-            <h2>どんなゲーム？</h2>
+        <header class="masthead">
+            <img class="icon" src="monsters_icon.jpg" alt="超絶競馬モンスターズのアイコン" width="104" height="104">
+            <h1><small>育成レースゲーム</small>超絶競馬<br>モンスターズ</h1>
+            <div class="stamp" aria-label="12月21日配信"><span><b>12.21</b>配信</span></div>
+        </header>
 
-            <div class="steps">
-                <div class="step" style="--c: var(--sky); --glow: rgba(57, 160, 255, .55)">
-                    <div class="step-pic"><img src="monsters_race2.jpg" alt="レース中の画面" loading="lazy"></div>
-                    <div>
-                        <h3><em>レース</em>自分で乗って、勝つ</h3>
-                        <p>見ているだけのレースではありません。スティックで位置を取り、ムチとスキルの使いどころを自分で決めます。</p>
-                        <ul>
-                            <li>スタミナと乳酸をどう残すかで、最後の伸びが変わる</li>
-                            <li>風、坂、荒れた馬場が勝負を分ける</li>
-                            <li>全国の競馬場で、新馬戦からG1、海外の大レースへ</li>
-                        </ul>
-                    </div>
+        <div class="dateline">
+            <span>iPhone・iPad／App Store</span>
+            <span><b>2026年12月21日（月）</b>配信　基本無料（アプリ内課金あり）</span>
+        </div>
+
+        <section class="front">
+            <div>
+                <p class="catch">そだてて、はしって、<br>いっとうしょう！</p>
+                <p class="lead">モンスターを育てて、自分の手でレースに勝つ。牧場で仲間を集め、引退した子どうしを交配して、もっと強い子へ血をつなぐ育成レースゲームです。</p>
+
+                <dl class="release">
+                    <div class="release-row"><dt>配信日</dt><dd><span class="big">2026.12.21</span>（月）</dd></div>
+                    <div class="release-row"><dt>料金</dt><dd>基本無料（アプリ内課金あり）</dd></div>
+                    <div class="release-row"><dt>対応</dt><dd>iPhone・iPad</dd></div>
+                </dl>
+
+                <div class="store">
+                    <span class="store-btn" aria-disabled="true"><small>iPhone・iPad</small><b>App Store</b></span>
+                    <p data-after="App Storeで配信中です">12月21日から、App Storeで遊べます</p>
                 </div>
+            </div>
 
-                <div class="step" style="--c: var(--dark); --glow: rgba(180, 76, 255, .55)">
-                    <div class="step-pic"><img src="monsters_stable.jpg" alt="馬房の画面" loading="lazy"></div>
-                    <div>
-                        <h3><em>育成</em>7日間で、どこまで強くなるか</h3>
-                        <p>食事、トレーニング、レース。1体を育てられるのは7日間だけ。何を伸ばして、どのレースをねらうかを考えます。</p>
-                        <ul>
-                            <li>60種類以上のモンスター</li>
-                            <li>育て方しだいで、ちがう姿に進化する</li>
-                            <li>1体ごとに、得意な能力も性格もちがう</li>
-                        </ul>
-                    </div>
-                </div>
-
-                <div class="step" style="--c: var(--sky); --glow: rgba(57, 160, 255, .55)">
-                    <div class="step-pic"><img src="monsters_ranch.jpg" alt="牧場の画面" loading="lazy"></div>
-                    <div>
-                        <h3><em>牧場</em>仲間は、向こうからやってくる</h3>
-                        <p>牧場に置き物やえさを置くと、モンスターが遊びに来ます。気になる子と勝負して、勝てば仲間に。</p>
-                        <ul>
-                            <li>置く物を変えると、来る子も変わる</li>
-                            <li>だれが来るかは、来てからのおたのしみ</li>
-                        </ul>
-                    </div>
-                </div>
-
-                <div class="step" style="--c: var(--dark); --glow: rgba(180, 76, 255, .55)">
-                    <div class="step-pic"><img src="monsters_freezer.jpg" alt="冷凍庫の画面" loading="lazy"></div>
-                    <div>
-                        <h3><em>交配</em>走りおえた子が、親になる</h3>
-                        <p>引退した子どうしを交配させると、子どもが生まれます。素質やスキルを受けついだ子で、さらに上のレースへ。</p>
-                        <ul>
-                            <li>大きいレースを勝った親の子は、生まれつき強くなりやすい</li>
-                            <li>同じ親でも、生まれる子は1体ずつちがう</li>
-                        </ul>
-                    </div>
-                </div>
+            <div class="photos">
+                <figure><img src="monsters_race.jpg" alt="レースの画面" width="600" height="1298"><figcaption><b>レース</b>　スティックで位置を取る</figcaption></figure>
+                <figure><img src="monsters_stable.jpg" alt="馬房の画面" width="600" height="1298"><figcaption><b>馬房</b>　7日間で育てる</figcaption></figure>
             </div>
         </section>
 
-        <section class="modes">
-            <h2>あそべること</h2>
-            <div class="mode-list">
-                <div class="mode"><b>育成</b><span>食事・トレーニング・レースで、モンスターを7日間そだてる</span></div>
-                <div class="mode"><b>オンラインレース</b><span>育てたモンスターで、ほかのプレイヤーと対戦する</span></div>
-                <div class="mode"><b>練習レース</b><span>好きな競馬場と距離で、自由に走る</span></div>
-                <div class="mode"><b>牧場</b><span>置き物やえさで、モンスターを呼ぶ</span></div>
-                <div class="mode"><b>図鑑</b><span>出会ったモンスターを集める</span></div>
+        <section class="card" id="card">
+            <div class="sec-head">
+                <h2>どんなゲーム？</h2>
+                <span>出馬表</span>
+            </div>
+
+            <div class="runner" style="--wc: var(--w1)">
+                <div class="waku"><b>1</b>枠</div>
+                <div class="pic"><img src="monsters_race2.jpg" alt="レース中の画面" loading="lazy" width="600" height="1298"></div>
+                <div class="text">
+                    <h3><small>レース</small><br>自分で乗って、勝つ</h3>
+                    <p>見ているだけのレースではありません。スティックで位置を取り、ムチとスキルの使いどころを自分で決めます。</p>
+                    <ul>
+                        <li>スタミナと乳酸をどう残すかで、最後の伸びが変わる</li>
+                        <li>風、坂、荒れた馬場が勝負を分ける</li>
+                        <li>全国の競馬場で、新馬戦からG1、海外の大レースへ</li>
+                    </ul>
+                </div>
+                <div class="mark" aria-label="本命">◎<small>本命</small></div>
+            </div>
+
+            <div class="runner" style="--wc: var(--w2); --wt: var(--paper)">
+                <div class="waku"><b>2</b>枠</div>
+                <div class="pic"><img src="monsters_stable.jpg" alt="馬房の画面" loading="lazy" width="600" height="1298"></div>
+                <div class="text">
+                    <h3><small>育成</small><br>7日間で、どこまで強くなるか</h3>
+                    <p>食事、トレーニング、レース。1体を育てられるのは7日間だけ。何を伸ばして、どのレースをねらうかを考えます。</p>
+                    <ul>
+                        <li>60種類以上のモンスター</li>
+                        <li>育て方しだいで、ちがう姿に進化する</li>
+                        <li>1体ごとに、得意な能力も性格もちがう</li>
+                    </ul>
+                </div>
+                <div class="mark" aria-label="対抗">○<small>対抗</small></div>
+            </div>
+
+            <div class="runner" style="--wc: var(--w3); --wt: var(--w1)">
+                <div class="waku"><b>3</b>枠</div>
+                <div class="pic"><img src="monsters_ranch.jpg" alt="牧場の画面" loading="lazy" width="600" height="1298"></div>
+                <div class="text">
+                    <h3><small>牧場</small><br>仲間は、向こうからやってくる</h3>
+                    <p>牧場に置き物やえさを置くと、モンスターが遊びに来ます。気になる子と勝負して、勝てば仲間に。</p>
+                    <ul>
+                        <li>置く物を変えると、来る子も変わる</li>
+                        <li>だれが来るかは、来てからのおたのしみ</li>
+                    </ul>
+                </div>
+                <div class="mark" aria-label="単穴">▲<small>単穴</small></div>
+            </div>
+
+            <div class="runner" style="--wc: var(--w4); --wt: var(--w1)">
+                <div class="waku"><b>4</b>枠</div>
+                <div class="pic"><img src="monsters_freezer.jpg" alt="冷凍庫の画面" loading="lazy" width="600" height="1298"></div>
+                <div class="text">
+                    <h3><small>交配</small><br>走りおえた子が、親になる</h3>
+                    <p>引退した子どうしを交配させると、子どもが生まれます。素質やスキルを受けついだ子で、さらに上のレースへ。</p>
+                    <ul>
+                        <li>大きいレースを勝った親の子は、生まれつき強くなりやすい</li>
+                        <li>同じ親でも、生まれる子は1体ずつちがう</li>
+                    </ul>
+                </div>
+                <div class="mark" aria-label="連下">△<small>連下</small></div>
             </div>
         </section>
 
-        <section class="end">
-            <h2>いっとうしょうを、<span class="nb">とりにいこう</span></h2>
-            <p>2026年12月21日、App Storeで配信します。基本無料で遊べます。</p>
-            <div class="store">
-                <span class="store-btn"><small>iPhone・iPad</small><b>App Store</b></span>
-                <p class="release"><b>2026年12月21日 配信</b>基本無料（アプリ内課金あり）</p>
+        <section class="card">
+            <div class="sec-head">
+                <h2>あそべること</h2>
+                <span>5つのモード</span>
             </div>
-            <p class="sns-title">レースの動画や最新情報はこちら</p>
-            <div class="sns">
-                <a href="https://x.com/daisotu_studio" target="_blank" rel="noopener"><b>X</b><small>@daisotu_studio</small></a>
-                <a href="https://www.tiktok.com/@samusondd" target="_blank" rel="noopener"><b>TikTok</b><small>@samusondd</small></a>
-                <a href="https://www.youtube.com/channel/UCv27mq18242o-rt0yvkju4A" target="_blank" rel="noopener"><b>YouTube</b><small>大卒スタジオ</small></a>
+            <table class="modes">
+                <thead><tr><th scope="col">モード</th><th scope="col">内容</th></tr></thead>
+                <tbody>
+                    <tr><th scope="row"><i>01</i>育成</th><td>食事・トレーニング・レースで、モンスターを7日間そだてる</td></tr>
+                    <tr><th scope="row"><i>02</i>オンラインレース</th><td>育てたモンスターで、ほかのプレイヤーと対戦する</td></tr>
+                    <tr><th scope="row"><i>03</i>練習レース</th><td>好きな競馬場と距離で、自由に走る</td></tr>
+                    <tr><th scope="row"><i>04</i>牧場</th><td>置き物やえさで、モンスターを呼ぶ</td></tr>
+                    <tr><th scope="row"><i>05</i>図鑑</th><td>出会ったモンスターを集める</td></tr>
+                </tbody>
+            </table>
+        </section>
+
+        <section class="post" id="post">
+            <div class="board">
+                <span class="label" id="board-label">配信日</span>
+                <span class="digits" id="board-digits">12.21</span>
+            </div>
+            <div class="post-body">
+                <h2>いっとうしょうを、<span class="nb">とりにいこう</span></h2>
+                <p>2026年12月21日、App Storeで配信します。基本無料（アプリ内課金あり）で遊べます。</p>
+                <div class="store">
+                    <span class="store-btn" aria-disabled="true"><small>iPhone・iPad</small><b>App Store</b></span>
+                </div>
+                <div class="sns">
+                    <a href="https://x.com/daisotu_studio" target="_blank" rel="noopener"><b>X</b><small>@daisotu_studio　最新情報</small></a>
+                    <a href="https://www.tiktok.com/@samusondd" target="_blank" rel="noopener"><b>TikTok</b><small>@samusondd　レースの動画</small></a>
+                    <a href="https://www.youtube.com/channel/UCv27mq18242o-rt0yvkju4A" target="_blank" rel="noopener"><b>YouTube</b><small>大卒スタジオ　紹介動画</small></a>
+                </div>
             </div>
         </section>
 
         <section class="ads" id="ads">
-            <h2>広告を募集しています</h2>
-            <p class="ads-lead">超絶競馬モンスターズでは、ゲームの中に載せる広告を募集しています。<br>めざしているのは地方創生です。地方の特産品を、ゲームを通じてたくさんの人に知ってもらう場として使っていただけます。</p>
-            <div class="mode-list">
-                <div class="mode"><b>募集しているもの</b><span>地方の特産品・名産品の宣伝</span></div>
-                <div class="mode"><b>載せ方</b><span>ゲームの世界に合う形を、ご相談しながら決めます</span></div>
-                <div class="mode"><b>費用・時期</b><span>内容に合わせてご案内します。まずはお気軽にお問い合わせください</span></div>
+            <div class="sec-head">
+                <h2>広告を募集しています</h2>
+                <span>地方の特産品</span>
             </div>
-            <div class="ads-shots">
-                <figure><img src="monsters_ad_goal.jpg" alt="ゴールの瞬間に、大きな広告の看板が映っている画面" loading="lazy"><figcaption>ゴールの瞬間。ゴール板の奥に大きな看板</figcaption></figure>
-                <figure><img src="monsters_ad_stretch.jpg" alt="ゴール前の直線に、広告の看板が並んでいる画面" loading="lazy"><figcaption>ゴール前のリプレイ。直線に看板がならぶ</figcaption></figure>
+            <div class="ads-body">
+                <div>
+                    <p>超絶競馬モンスターズでは、ゲームの中に載せる広告を募集しています。</p>
+                    <p>めざしているのは地方創生です。地方の特産品を、ゲームを通じてたくさんの人に知ってもらう場として使っていただけます。</p>
+                    <table>
+                        <tr><th scope="row">募集しているもの</th><td>地方の特産品・名産品の宣伝</td></tr>
+                        <tr><th scope="row">載せ方</th><td>ゲームの世界に合う形を、ご相談しながら決めます</td></tr>
+                        <tr><th scope="row">費用・時期</th><td>内容に合わせてご案内します。まずはお気軽にお問い合わせください</td></tr>
+                    </table>
+                    <p style="margin-top:16px">ご連絡は、X（旧Twitter）のアカウント「大卒スタジオ <b>@daisotu_studio</b>」までお願いします。</p>
+                    <a class="ads-mail" href="https://x.com/daisotu_studio" target="_blank" rel="noopener">Xで連絡する<small>大卒スタジオ @daisotu_studio</small></a>
+                </div>
+                <div>
+                    <div class="ads-shots">
+                        <figure><img src="monsters_ad_goal.jpg" alt="ゴールの瞬間に、大きな広告の看板が映っている画面" loading="lazy" width="720" height="1557"><figcaption>ゴールの瞬間。ゴール板の奥に大きな看板</figcaption></figure>
+                        <figure><img src="monsters_ad_stretch.jpg" alt="ゴール前の直線に、広告の看板が並んでいる画面" loading="lazy" width="720" height="1557"><figcaption>ゴール前のリプレイ。直線に看板がならぶ</figcaption></figure>
+                    </div>
+                    <p class="ads-note">画面は開発中のものです。看板の中身は見本です。</p>
+                </div>
             </div>
-            <p class="ads-note">画面は開発中のものです。看板の中身は見本です。</p>
-            <p class="ads-lead">ご連絡は、X（旧Twitter）のアカウント「大卒スタジオ <b>@daisotu_studio</b>」までお願いします。</p>
-            <a class="ads-mail" href="https://x.com/daisotu_studio" target="_blank" rel="noopener">Xで連絡する<small>大卒スタジオ @daisotu_studio</small></a>
         </section>
 
         <footer class="foot">
@@ -639,20 +664,35 @@
                 <a href="monsters-terms.html">利用規約</a>
                 <a href="monsters-legal.html">特定商取引法・資金決済法にもとづく表示</a>
                 <a href="privacy.html">プライバシーポリシー</a>
-                <a href="#ads">広告の募集</a>
                 <a href="studio.html">大卒スタジオのほかのアプリ</a>
             </nav>
-            <div>お問い合わせ　<a class="mail" href="mailto:contact@daisotu-studio.com">contact@daisotu-studio.com</a></div>
-            <div>X（旧Twitter）　<a class="mail" href="https://x.com/daisotu_studio" target="_blank" rel="noopener">大卒スタジオ @daisotu_studio</a></div>
-            <div>TikTok　<a class="mail" href="https://www.tiktok.com/@samusondd" target="_blank" rel="noopener">@samusondd</a>　YouTube　<a class="mail" href="https://www.youtube.com/channel/UCv27mq18242o-rt0yvkju4A" target="_blank" rel="noopener">大卒スタジオ</a></div>
-            <div>&copy; 2025 DAISOTU STUDIO（大卒スタジオ）</div>
+            <div class="info">
+                <span>お問い合わせ　<a href="mailto:contact@daisotu-studio.com">contact@daisotu-studio.com</a></span>
+                <span>X　<a href="https://x.com/daisotu_studio" target="_blank" rel="noopener">@daisotu_studio</a></span>
+                <span>TikTok　<a href="https://www.tiktok.com/@samusondd" target="_blank" rel="noopener">@samusondd</a></span>
+                <span>YouTube　<a href="https://www.youtube.com/channel/UCv27mq18242o-rt0yvkju4A" target="_blank" rel="noopener">大卒スタジオ</a></span>
+            </div>
+            <div class="info">&copy; 2025 DAISOTU STUDIO（大卒スタジオ）</div>
         </footer>
-    </main>
+    </div>
+
     <script>
-        // 配信日（日本時間 2026-12-21 0時）を過ぎたら「配信中」に切りかえる
-        if (Date.now() >= Date.parse('2026-12-21T00:00:00+09:00')) {
-            document.querySelectorAll('[data-after]').forEach(function (el) { el.textContent = el.dataset.after; });
-        }
+        // 配信日（日本時間 2026-12-21 0時）までの日数を掲示板に出す。過ぎたら「配信中」。
+        (function () {
+            var release = Date.parse('2026-12-21T00:00:00+09:00');
+            var now = Date.now();
+            var label = document.getElementById('board-label');
+            var digits = document.getElementById('board-digits');
+            if (now >= release) {
+                label.textContent = 'App Store';
+                digits.textContent = '配信中';
+                document.querySelectorAll('[data-after]').forEach(function (el) { el.textContent = el.dataset.after; });
+            } else {
+                var days = Math.ceil((release - now) / 86400000);
+                label.textContent = '12月21日の配信まで';
+                digits.innerHTML = 'あと' + days + '<small>日</small>';
+            }
+        })();
     </script>
 </body>
 </html>
